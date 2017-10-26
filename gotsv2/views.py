@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Character
+
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the gotsv2 index.")
+    characters = Character.objects.all()
+    context = {'characters': characters}
+    return render(request, 'gotsv2/index.html', context)
