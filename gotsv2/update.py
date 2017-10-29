@@ -20,7 +20,7 @@ class Update():
         self.infolist = []
 
     def generatelinks(self):
-        for item in self.all[:22]:
+        for item in self.all[:12]:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
@@ -59,12 +59,12 @@ class Update():
                 try:
                     redirected = soup2.find("a", {"class:", "mw-redirect"}).text
                     if redirected == self.namelist[a]:
-                        self.checklist.append("No")
+                        self.checklist.append(0)
                         self.infolist.append("")
                     else:
                         self.getinfobox(item)
                 except:
-                    self.checklist.append("No")
+                    self.checklist.append(0)
                     self.infolist.append("")
             print(str(a) + " of 124 entries checked")
             a = a + 1
@@ -77,13 +77,13 @@ class Update():
             infobox2 = soup3.find(("table", {"class:", "infobox"}))
             infobox = infobox2.encode('utf-8').strip()
             if "Male" or "Female" in infobox:
-                self.checklist.append("Yes")
+                self.checklist.append(1)
                 self.infolist.append(infobox)
             else:
-                self.checklist.append("No")
+                self.checklist.append(0)
                 self.infolist.append("")
         except:
-            self.checklist.append("No")
+            self.checklist.append(0)
             self.infolist.append("")
 
     def getinfobox(self, item):
@@ -91,12 +91,12 @@ class Update():
             table = soup2.find_all(("table", {"class:", "infobox"}))
             infobox = table[0].encode('utf-8').strip()
             if str(infobox).startswith("b'<table class=\"infobox\""):
-                self.checklist.append("Yes")
+                self.checklist.append(1)
                 self.infolist.append(infobox)
             else:
                 self.refineinfobox(item, table)
         except:
-            self.checklist.append("No")
+            self.checklist.append(0)
             self.infolist.append("")
 
     def refineinfobox(self, item, table):
@@ -110,12 +110,12 @@ class Update():
         while t is True:
             print("saved")
             infobox = table[index].encode('utf-8').strip()
-            self.checklist.append("Yes")
+            self.checklist.append(1)
             self.infolist.append(infobox)
             break
         if t is False:
             print("nothing saved")
-            self.checklist.append("No")
+            self.checklist.append(0)
             self.infolist.append("")
         print("done")
 
@@ -125,14 +125,17 @@ class Update():
         # print(self.linklist)
         # print(self.checklist)
         # print(self.infolist)
-        df = pandas.DataFrame(
+        unordered_df = pandas.DataFrame(
             {'Names': self.namelist,
              'URLs': self.linklist,
              'Pages': self.checklist,
              'Infoboxes': self.infolist})
-        print(df)
-        # df_reordered = df[['Names', 'URLs', 'Pages', 'Infoboxes']]
-        # print(df_reordered)
+        df = unordered_df[['Names', 'URLs', 'Pages', 'Infoboxes']]
+        #this KIND of works... ONE row is added with every single entry in the relevant df column set as the value for each field.
+        #this will probably be solved through iteration... OR just the update() method instead.
+        m = Character(name=df['Names'], url=df['URLs'], page=df['Pages'], infobox=df['Infoboxes'], created_at=timezone.now(), updated_at=timezone.now())
+        m.save()
+        # print(type(df['Pages']))
 
         # a = 2
         # for row in df_reordered.loc[a]:
