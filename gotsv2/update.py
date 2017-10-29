@@ -19,35 +19,8 @@ class Update():
         self.checklist = []
         self.infolist = []
 
-    # def generatelinks(self):
-    #     # a = 0
-    #     for item in self.all:
-    #         name = item.text
-    #         # while a <= 5:
-    #         if self.p.match(name) is None:
-    #             # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
-    #             if name == "Eddard Stark":
-    #                 self.namelist.append("Ned Stark")
-    #                 rightname = "Ned_Stark"
-    #                 url = str("https://en.wikipedia.org/wiki/" + rightname)
-    #                 self.linklist.append(url)
-    #                 # a = a + 1
-    #             else:
-    #                 self.namelist.append(name)
-    #                 urlend = name.replace(" ", "_")
-    #                 underscore = "_"
-    #                 if urlend.endswith(underscore):
-    #                     # takes off the last underscore if present using indexing
-    #                     urlend = urlend[0:-1]
-    #                         # print(urlend)
-    #                     url = str("https://en.wikipedia.org/wiki/" + urlend)
-    #                     self.linklist.append(url)self.
-    #                     # a = a + 1
-    #         else:
-    #             pass
-    #             # a = a + 1
     def generatelinks(self):
-        for item in self.all:
+        for item in self.all[:22]:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
