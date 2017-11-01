@@ -11,7 +11,7 @@ class UpdateMethodTests(TestCase):
     # does initial ASOAF test page request work
     def test_see_if_initial_request_returned(self):
         r = Update.requestNamePage()
-
+#this doesn't do anything yet but at least it runs?
 #does initial ASOAF page scrape work
 
 #test for each stage of update.py method functionality

@@ -5,6 +5,7 @@ import re
 from bs4 import BeautifulSoup
 from .models import Character
 
+
 class Update():
     def __init__(self):
         regex = (
@@ -120,10 +121,6 @@ class Update():
 
 
     def CharacterModelUpdate(self):
-        # print(self.namelist)
-        # print(self.linklist)
-        # print(self.checklist)
-        # print(self.infolist)
         unordered_df = pandas.DataFrame(
             {'Names': self.namelist,
              'URLs': self.linklist,
@@ -134,15 +131,22 @@ class Update():
         for item in df['Names']:
             m = Character(name=df['Names'][a], url=df['URLs'][a], page=df['Pages'][a], infobox=df['Infoboxes'][a], created_at=timezone.now(), updated_at=timezone.now())
             if df['Pages'][a] == 1:
-                m.save()
+                u = df['URLs'][a]
+                if self.CheckForUpdateDuplicates(u) is True:
+                    print(u, " already in there")
+                    pass
+                else:
+                    print(u, " will be added")
+                    m.save()
             else:
                 pass
             a = a + 1
-        # for item in df['Name']:
-        #     # 1. Make a new Character object
-        #     # 2. Save the name from namelist to the new character
-        #     # m = Character(name=n, url='#', page=1, infobox='.', created_at=timezone.now(), updated_at=timezone.now())
-        #     print('ok')
-        #     # 3. Persist the new Character to the database (save())
-        #     # m.save()
+
+    def CheckForUpdateDuplicates(self,u):
+        try:
+            Character.objects.get(url=u)
+            return True
+        except Character.DoesNotExist:
+            return False
+            pass
 
