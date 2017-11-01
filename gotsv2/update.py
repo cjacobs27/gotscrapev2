@@ -20,7 +20,8 @@ class Update():
         self.infolist = []
 
     def generatelinks(self):
-        for item in self.all[:12]:
+        # for item in self.all[:12]:
+        for item in self.all:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
@@ -103,21 +104,17 @@ class Update():
         t = False
         for i in range(4):
             if "infobox" in str(table[i]):
-                print(i)
                 index = i
                 t = True
                 break
         while t is True:
-            print("saved")
             infobox = table[index].encode('utf-8').strip()
             self.checklist.append(1)
             self.infolist.append(infobox)
             break
         if t is False:
-            print("nothing saved")
             self.checklist.append(0)
             self.infolist.append("")
-        print("done")
 
 
     def CharacterModelUpdate(self):
@@ -131,35 +128,14 @@ class Update():
              'Pages': self.checklist,
              'Infoboxes': self.infolist})
         df = unordered_df[['Names', 'URLs', 'Pages', 'Infoboxes']]
-        #this KIND of works... ONE row is added with every single entry in the relevant df column set as the value for each field.
-        #this will probably be solved through iteration... OR just the update() method instead.
-        m = Character(name=df['Names'], url=df['URLs'], page=df['Pages'], infobox=df['Infoboxes'], created_at=timezone.now(), updated_at=timezone.now())
-        m.save()
-        # print(type(df['Pages']))
-
-        # a = 2
-        # for row in df_reordered.loc[a]:
-        #     print(row)
-        #     a = a + 1
-
-        # characters = [
-        #     {
-        #         'name': 'Stark',
-        #         'url': '#',
-        #     },
-        #     {
-        #         'name': 'Bolton',
-        #         'url': '#',
-        #     },
-        #     {
-        #         'name': 'Lannister',
-        #         'url': '#',
-        #     }
-        # ]
-
-        # for character in characters:
-
-
+        a = 0
+        for item in df['Names']:
+            m = Character(name=df['Names'][a], url=df['URLs'][a], page=df['Pages'][a], infobox=df['Infoboxes'][a], created_at=timezone.now(), updated_at=timezone.now())
+            if df['Pages'][a] == 1:
+                m.save()
+            else:
+                pass
+            a = a + 1
         # for item in df['Name']:
         #     # 1. Make a new Character object
         #     # 2. Save the name from namelist to the new character
