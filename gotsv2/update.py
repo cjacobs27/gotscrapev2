@@ -7,10 +7,6 @@ from .models import Character
 
 class Update():
     def __init__(self):
-        r = requests.get("https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters")
-        c = r.content
-        soup = BeautifulSoup(c, "html.parser")
-        self.all = soup.find_all("span", {"class": "mw-headline"})
         regex = (
         '(House|References|Secondary sources|Primary sources|Bibliography|External links|Other characters|Royal court and officials|Night\\\'s Watch and wildlings|The Sand Snakes)')
         self.p = re.compile(regex)
@@ -18,6 +14,12 @@ class Update():
         self.linklist = []
         self.checklist = []
         self.infolist = []
+
+    def requestNamePage(self):
+        r = requests.get("https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters")
+        c = r.content
+        soup = BeautifulSoup(c, "html.parser")
+        self.all = soup.find_all("span", {"class": "mw-headline"})
 
     def generatelinks(self):
         # for item in self.all[:12]:
