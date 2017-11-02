@@ -20,8 +20,8 @@ def update(request):
     # u.linkscrape()
     # u.CharacterModelUpdate()
     i = Infoscrape()
-    i.getInfoboxCode()
-    i.encodeGender()
+    i.getinfoboxcode()
+    i.encodegender()
 
     # Only after the scripts have run will a response be sent to the client.
     # This template will be rendered:

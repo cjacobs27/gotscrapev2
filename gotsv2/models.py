@@ -15,7 +15,7 @@ class Character(models.Model):
     infobox = models.TextField()
     created_at = models.DateTimeField('created')
     updated_at = models.DateTimeField('last updated')
-    gender = models.ForeignKey(Gender)
+    gender = models.ForeignKey(Gender, default=1)
 
     def __str__(self):
         return self.name
