@@ -12,14 +12,6 @@ class Character(models.Model):
     def __str__(self):
         return self.name
 
-    #need to create another method here which causes Character model to update
-
-    # def databaseUpdate(self, Update):
-    #     for item in Update.namelist:
-    #         print(item)
-
-
-
 
 class Gender(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
