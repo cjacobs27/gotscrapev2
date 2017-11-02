@@ -14,6 +14,8 @@ class Infoscrape():
             self.html = BeautifulSoup(item, "html.parser")
 
     def encodegender(self):
+        #THERE IS A BUG IN THIS WHICH COULD BE IDENTIFIED IF I COULD FIGURE OUT HOW TO SEE
+        #len(self.genders) AFTER IT HAS BEEN POPULATED.
         table_rows = self.html.find_all('tr')
         for row in table_rows:
             header = row.find('th')
@@ -28,6 +30,9 @@ class Infoscrape():
             else:
                 self.genders.append("1")
         a = 0
+        #GENDERS DOES NOT HAVE ENOUGH LIST ENTRIES
+        #SOME ARE BEING MISSED
+        #THIS CAUSES AN INDEX ERROR WHEN RUNNING THE BELOW:
         for i in Character.objects.all():
             updategender= i
             if int(self.genders[a]) == 1:
