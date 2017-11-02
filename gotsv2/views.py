@@ -14,11 +14,11 @@ def index(request):
 def update(request):
     # A request has been sent to this method!
     # Run any scripts.
-    # u = Update()
-    # u.requestNamePage()
-    # u.generatelinks()
-    # u.linkscrape()
-    # u.CharacterModelUpdate()
+    u = Update()
+    u.requestNamePage()
+    u.generatelinks()
+    u.linkscrape()
+    u.CharacterModelUpdate()
     i = Infoscrape()
     i.encodegender()
 

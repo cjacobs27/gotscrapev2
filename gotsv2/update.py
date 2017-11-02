@@ -9,7 +9,7 @@ from .models import Character
 class Update():
     def __init__(self):
         regex = (
-        '(House|References|Secondary sources|Primary sources|Bibliography|External links|Other characters|Royal court and officials|Night\\\'s Watch and wildlings|The Sand Snakes)')
+        '(House|References|Secondary sources|Val|Craster|Hodor|Osha|Primary sources|Bibliography|External links|Other characters|Royal court and officials|Night\\\'s Watch and wildlings|The Sand Snakes)')
         self.p = re.compile(regex)
         self.namelist = []
         self.linklist = []
@@ -28,9 +28,15 @@ class Update():
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
+                #....turns out I have to screen out a few more... not great.
                 if name == "Eddard Stark":
                     self.namelist.append("Ned Stark")
                     rightname = "Ned_Stark"
+                    url = str("https://en.wikipedia.org/wiki/" + rightname)
+                    self.linklist.append(url)
+                elif name == "Gilly":
+                    self.namelist.append("Gilly")
+                    rightname = "Gilly_(A_Song_of_Ice_and_Fire)"
                     url = str("https://en.wikipedia.org/wiki/" + rightname)
                     self.linklist.append(url)
                 else:
@@ -70,7 +76,7 @@ class Update():
                 except:
                     self.checklist.append(0)
                     self.infolist.append("")
-            print(str(a) + " of 124 entries checked")
+            print(str(a) + "checked")
             a = a + 1
 
     def trychar(self, request, item):
@@ -84,8 +90,18 @@ class Update():
                 self.checklist.append(1)
                 self.infolist.append(infobox)
             else:
-                self.checklist.append(0)
-                self.infolist.append("")
+                try:
+                    request2 = requests.get(str(item) + "_(A_Song_of_Ice_and_Fire)")
+                    y = request2.content
+                    soup3 = BeautifulSoup(y, "html.parser")
+                    infobox2 = soup3.find(("table", {"class:", "infobox"}))
+                    infobox = infobox2.encode('utf-8').strip()
+                    if "Male" or "Female" in infobox:
+                        self.checklist.append(1)
+                        self.infolist.append(infobox)
+                except:
+                    self.checklist.append(0)
+                    self.infolist.append("")
         except:
             self.checklist.append(0)
             self.infolist.append("")
