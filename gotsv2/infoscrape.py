@@ -20,15 +20,31 @@ class Infoscrape():
                 if "Gender" in str(header):
                     gender = value.text
                     self.unencodedGender.append(gender)
-        self.encodeGender(self.unencodedGender)
+        self.encodeGender()
 
-    def encodeGender(self,unencodedGender):
-        for item in unencodedGender:
+    def encodeGender(self):
+        for item in self.unencodedGender:
             if "Female" in item:
-                self.genders.append("1")
+                self.genders.append("2")
             else:
                 self.genders.append("1")
-        a = 1
+        a = 0
+        for i in Character.objects.all():
+            updategender= i
+            if int(self.genders[a]) == 1:
+                updategender.gender = Gender(1)
+                updategender.save()
+            else:
+                updategender.gender = Gender(2)
+                updategender.save()
+            a = a + 1
+        # a = 1
+        # for i in self.genders:
+        #     updategender = Character.objects.get(pk=1)
+        #     updategender.gender = i
+        #     updategender.save()
+        #     a = a + 1
+
         # for p in self.genders:
         #     name = Character.objects.filter(pk=a).values('name')
         #     g = Gender(character=p, name=name)
