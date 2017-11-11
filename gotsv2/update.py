@@ -22,7 +22,7 @@ class Update():
         self.c = r.content
         #status required for testing
         status = r.status_code
-        return status, self.c
+        return status
 
     def generatelinks(self):
         soup = BeautifulSoup(self.c, "html.parser")

@@ -7,10 +7,14 @@ from .update import Update
 # from bs4 import BeautifulSoup
 # from .models import Character
 
+
 class UpdateMethodTests(TestCase):
     # does initial ASOAF test page request work
-    def test_see_if_initial_request_returned(self):
-        r = Update.requestNamePage()
+    def test_see_if_mainpage_request_returned(self):
+        updatemethod = Update.requestNamePage(self)
+        self.assertEqual(updatemethod,200)
+
+
 #this doesn't do anything yet but at least it runs?
 #does initial ASOAF page scrape work
 
