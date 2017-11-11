@@ -6,29 +6,25 @@ from bs4 import BeautifulSoup
 from .models import Character
 
 
-class Update():
+class Update:
     def __init__(self):
         regex = (
         '(House|References|Secondary sources|Val|Craster|Hodor|Osha|Primary sources|Bibliography|External links|Other characters|Royal court and officials|Night\\\'s Watch and wildlings|The Sand Snakes)')
+        self.name_page = "https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters"
         self.p = re.compile(regex)
         self.namelist = []
         self.linklist = []
         self.checklist = []
         self.infolist = []
 
-    def requestNamePage(self):
-        #gets code from URL, returns requested url content
-        r = requests.get("https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters")
-        self.c = r.content
-        #status required for testing
-        status = r.status_code
-        return status
+    def get_name_page_content(self):
+        return requests.get(self.name_page).content
 
     def generatelinks(self):
-        soup = BeautifulSoup(self.c, "html.parser")
-        self.allnames = soup.find_all("span", {"class": "mw-headline"})
-        # for item in self.allnames[:12]:
-        for item in self.allnames:
+        soup = BeautifulSoup(self.get_name_page_content(), "html.parser")
+        allnames = soup.find_all("span", {"class": "mw-headline"})
+        # for item in allnames[:12]:
+        for item in allnames:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard

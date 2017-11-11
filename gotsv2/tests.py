@@ -1,21 +1,9 @@
 import requests
 from django.test import TestCase
 from .update import Update
-# from django.utils import timezone
-# import pandas
-# import re
-# from bs4 import BeautifulSoup
-# from .models import Character
 
 
 class UpdateMethodTests(TestCase):
-    # does initial ASOAF test page request work
-    def test_see_if_mainpage_request_returned(self):
-        updatemethod = Update.requestNamePage(self)
-        self.assertEqual(updatemethod,200)
-
-
-#this doesn't do anything yet but at least it runs?
-#does initial ASOAF page scrape work
-
-#test for each stage of update.py method functionality
+    def test_see_if_mainpage_content_returned_successfully(self):
+        request = requests.get("https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters")
+        self.assertEqual(request.content, Update().get_name_page_content())

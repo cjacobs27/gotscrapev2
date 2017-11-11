@@ -11,11 +11,9 @@ def index(request):
     context = {'characters': characters}
     return render(request, 'gotsv2/index.html', context)
 
+
 def update(request):
-    # A request has been sent to this method!
-    # Run any scripts.
     u = Update()
-    u.requestNamePage()
     u.generatelinks()
     u.linkscrape()
     u.CharacterModelUpdate()
