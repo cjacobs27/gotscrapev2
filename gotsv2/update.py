@@ -12,15 +12,15 @@ class Update:
         '(House|References|Secondary sources|Val|Craster|Hodor|Osha|Primary sources|Bibliography|External links|Other characters|Royal court and officials|Night\\\'s Watch and wildlings|The Sand Snakes)')
         self.name_page = "https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters"
         self.p = re.compile(regex)
-        self.namelist = []
-        self.linklist = []
-        self.checklist = []
-        self.infolist = []
+        self.name_list = []
+        self.link_list = []
+        self.check_list = []
+        self.info_list = []
 
     def get_name_page_content(self):
         return requests.get(self.name_page).content
 
-    def generatelinks(self):
+    def generate_links(self):
         soup = BeautifulSoup(self.get_name_page_content(), "html.parser")
         allnames = soup.find_all("span", {"class": "mw-headline"})
         # for item in allnames[:12]:
@@ -28,37 +28,35 @@ class Update:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
-                #....turns out I have to screen out a few more... not great.
+                # and TIL Gilly is also an island
                 if name == "Eddard Stark":
-                    self.namelist.append("Ned Stark")
-                    rightname = "Ned_Stark"
-                    url = str("https://en.wikipedia.org/wiki/" + rightname)
-                    self.linklist.append(url)
+                    self.name_list.append("Ned Stark")
+                    correct_name_to_match_url = "Ned_Stark"
+                    url = str("https://en.wikipedia.org/wiki/" + correct_name_to_match_url)
+                    self.link_list.append(url)
                 elif name == "Gilly":
-                    self.namelist.append("Gilly")
-                    rightname = "Gilly_(A_Song_of_Ice_and_Fire)"
-                    url = str("https://en.wikipedia.org/wiki/" + rightname)
-                    self.linklist.append(url)
+                    self.name_list.append("Gilly")
+                    correct_name_to_match_url = "Gilly_(A_Song_of_Ice_and_Fire)"
+                    url = str("https://en.wikipedia.org/wiki/" + correct_name_to_match_url)
+                    self.link_list.append(url)
                 else:
-                    self.namelist.append(name)
-                    urlend = name.replace(" ", "_")
+                    self.name_list.append(name)
+                    url_suffix = name.replace(" ", "_")
                     underscore = "_"
-                    if urlend.endswith(underscore):
+                    if url_suffix.endswith(underscore):
                         # takes off the last underscore if present using indexing
-                        urlend = urlend[0:-1]
-                        # print(urlend)
-                    url = str("https://en.wikipedia.org/wiki/" + urlend)
-                    self.linklist.append(url)
+                        url_suffix = url_suffix[0:-1]
+                        # print(url_suffix)
+                    url = str("https://en.wikipedia.org/wiki/" + url_suffix)
+                    self.link_list.append(url)
             else:
                 pass
+        list_for_testing = [self.name_list, self.link_list]
+        return list_for_testing
 
-
-                # character page exists checker - scrapes for redirect link text (this is the name of the character if redirected to
-                # the 'list of characters' page
-
-    def linkscrape(self):
+    def link_scrape(self):
         a = 0
-        for item in self.linklist:
+        for item in self.link_list:
             request = requests.get(item)
             z = request.content
             global soup2
@@ -68,14 +66,14 @@ class Update:
             else:
                 try:
                     redirected = soup2.find("a", {"class:", "mw-redirect"}).text
-                    if redirected == self.namelist[a]:
-                        self.checklist.append(0)
-                        self.infolist.append("")
+                    if redirected == self.name_list[a]:
+                        self.check_list.append(0)
+                        self.info_list.append("")
                     else:
                         self.getinfobox(item)
                 except:
-                    self.checklist.append(0)
-                    self.infolist.append("")
+                    self.check_list.append(0)
+                    self.info_list.append("")
             print(str(a) + "checked")
             a = a + 1
 
@@ -87,8 +85,8 @@ class Update:
             infobox2 = soup3.find(("table", {"class:", "infobox"}))
             infobox = infobox2.encode('utf-8').strip()
             if "Male" or "Female" in infobox:
-                self.checklist.append(1)
-                self.infolist.append(infobox)
+                self.check_list.append(1)
+                self.info_list.append(infobox)
             else:
                 try:
                     request2 = requests.get(str(item) + "_(A_Song_of_Ice_and_Fire)")
@@ -97,27 +95,27 @@ class Update:
                     infobox2 = soup3.find(("table", {"class:", "infobox"}))
                     infobox = infobox2.encode('utf-8').strip()
                     if "Male" or "Female" in infobox:
-                        self.checklist.append(1)
-                        self.infolist.append(infobox)
+                        self.check_list.append(1)
+                        self.info_list.append(infobox)
                 except:
-                    self.checklist.append(0)
-                    self.infolist.append("")
+                    self.check_list.append(0)
+                    self.info_list.append("")
         except:
-            self.checklist.append(0)
-            self.infolist.append("")
+            self.check_list.append(0)
+            self.info_list.append("")
 
     def getinfobox(self, item):
         try:
             table = soup2.find_all(("table", {"class:", "infobox"}))
             infobox = table[0].encode('utf-8').strip()
             if str(infobox).startswith("b'<table class=\"infobox\""):
-                self.checklist.append(1)
-                self.infolist.append(infobox)
+                self.check_list.append(1)
+                self.info_list.append(infobox)
             else:
                 self.refineinfobox(item, table)
         except:
-            self.checklist.append(0)
-            self.infolist.append("")
+            self.check_list.append(0)
+            self.info_list.append("")
 
     def refineinfobox(self, item, table):
         t = False
@@ -128,20 +126,20 @@ class Update:
                 break
         while t is True:
             infobox = table[index].encode('utf-8').strip()
-            self.checklist.append(1)
-            self.infolist.append(infobox)
+            self.check_list.append(1)
+            self.info_list.append(infobox)
             break
         if t is False:
-            self.checklist.append(0)
-            self.infolist.append("")
+            self.check_list.append(0)
+            self.info_list.append("")
 
 
     def CharacterModelUpdate(self):
         unordered_df = pandas.DataFrame(
-            {'Names': self.namelist,
-             'URLs': self.linklist,
-             'Pages': self.checklist,
-             'Infoboxes': self.infolist})
+            {'Names': self.name_list,
+             'URLs': self.link_list,
+             'Pages': self.check_list,
+             'Infoboxes': self.info_list})
         df = unordered_df[['Names', 'URLs', 'Pages', 'Infoboxes']]
         a = 0
         for item in df['Names']:
