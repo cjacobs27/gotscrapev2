@@ -3,5 +3,10 @@ language: python
 python:
   - 3.6
 
+install:
+  - pip install django
+  - pip install bs4
+  - pip install pandas
+
 script:
   - python manage.py test gotsv2
