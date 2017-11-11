@@ -7,6 +7,7 @@ install:
   - pip install django
   - pip install bs4
   - pip install pandas
+  - pip install requests
 
 script:
   - python manage.py test gotsv2
