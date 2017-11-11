@@ -14,8 +14,8 @@ def index(request):
 
 def update(request):
     u = Update()
-    u.generatelinks()
-    u.linkscrape()
+    u.generate_links()
+    u.link_scrape()
     u.CharacterModelUpdate()
     i = Infoscrape()
     i.encodegender()
