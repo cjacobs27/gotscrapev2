@@ -17,14 +17,18 @@ class Update():
         self.infolist = []
 
     def requestNamePage(self):
+        #gets code from URL, returns requested url content
         r = requests.get("https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters")
-        c = r.content
-        soup = BeautifulSoup(c, "html.parser")
-        self.all = soup.find_all("span", {"class": "mw-headline"})
+        self.c = r.content
+        #status required for testing
+        status = r.status_code
+        return status, self.c
 
     def generatelinks(self):
-        # for item in self.all[:12]:
-        for item in self.all:
+        soup = BeautifulSoup(self.c, "html.parser")
+        self.allnames = soup.find_all("span", {"class": "mw-headline"})
+        # for item in self.allnames[:12]:
+        for item in self.allnames:
             name = item.text
             if self.p.match(name) is None:
                 # gotta check for Ned specifically as his char page is Ned_Stark but name listed everywhere as Eddard
