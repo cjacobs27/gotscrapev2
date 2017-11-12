@@ -62,7 +62,7 @@ class Update:
             global soup2
             soup2 = BeautifulSoup(z, "html.parser")
             if "may refer to" in soup2.text:
-                self.trychar(request, item)
+                self.try_adding_character_suffix_to_url(item)
             else:
                 try:
                     redirected = soup2.find("a", {"class:", "mw-redirect"}).text
@@ -76,8 +76,9 @@ class Update:
                     self.info_list.append("")
             print(str(a) + "checked")
             a = a + 1
+            print()
 
-    def trychar(self, request, item):
+    def try_adding_character_suffix_to_url(self, item):
         try:
             request2 = requests.get(str(item) + "_(character)")
             y = request2.content
@@ -133,7 +134,6 @@ class Update:
             self.check_list.append(0)
             self.info_list.append("")
 
-
     def CharacterModelUpdate(self):
         unordered_df = pandas.DataFrame(
             {'Names': self.name_list,
@@ -148,7 +148,6 @@ class Update:
                 u = df['URLs'][a]
                 if self.CheckForUpdateDuplicates(u) is True:
                     print(u, " already in there")
-                    pass
                 else:
                     print(u, " will be added")
                     m.save()
@@ -162,5 +161,5 @@ class Update:
             return True
         except Character.DoesNotExist:
             return False
-            pass
+
 
