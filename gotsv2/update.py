@@ -147,9 +147,9 @@ class Update:
             if df['Pages'][a] == 1:
                 u = df['URLs'][a]
                 if self.CheckForUpdateDuplicates(u) is True:
-                    print(u, " already in there")
+                    print(u, " already in there    (", item ,")")
                 else:
-                    print(u, " will be added")
+                    print(u, " will be added    (", item ,")")
                     m.save()
             else:
                 pass

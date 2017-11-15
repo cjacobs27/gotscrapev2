@@ -18,7 +18,7 @@ def update(request):
     u.link_scrape()
     u.CharacterModelUpdate()
     i = Infoscrape()
-    i.encodegender()
+    i.encode_gender_and_update()
 
     # Only after the scripts have run will a response be sent to the client.
     # This template will be rendered:

@@ -1,7 +1,7 @@
 import requests
 from django.test import TestCase
 from .update import Update
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 
 class UpdateMethodTests(TestCase):

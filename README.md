@@ -2,10 +2,11 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cjacobs27/gotscrapev2/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cjacobs27/gotscrapev2/?branch=master)
 
+[![Build Status](https://travis-ci.org/cjacobs27/gotscrapev2.svg?branch=master)](https://travis-ci.org/cjacobs27/gotscrapev2)
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/32285230bd5743cf92657043245634aa)](https://www.codacy.com/app/cjacobs27/gotscrapev2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cjacobs27/gotscrapev2&amp;utm_campaign=Badge_Grade)
 
-
-This is still a work in progress and only works on your local machine at the moment.
+This is still a work in progress and only runs on your local machine at the moment.
 
 If you're happy to install the required packages, and Django, open command line in unzipped gotscrapev2 folder:
 

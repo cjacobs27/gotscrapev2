@@ -20,7 +20,8 @@ class Character(models.Model):
     def __str__(self):
         return self.name
 
+    # get gender split
     def get_gender_split(self):
-        # get gender split
+        pass
 
 
