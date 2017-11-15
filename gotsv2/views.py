@@ -23,3 +23,7 @@ def update(request):
     # Only after the scripts have run will a response be sent to the client.
     # This template will be rendered:
     return render(request, 'gotsv2/update.html')
+
+def graph(request):
+    #call get_gender_split()
+    # render graph template
