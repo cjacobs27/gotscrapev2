@@ -36,10 +36,10 @@ class Infoscrape():
                 update_gender.gender = Gender(2)
                 update_gender.save()
             a = a + 1
-   '''
-   Commented out code is probably a better way of doing this...
-   but not right now
-   '''
+
+   # Commented out code is probably a better way of doing this...
+   # but not right now
+
     # def gender_text_scrape(self):
     #     for item in self.dbCharacterObjects:
     #         html = BeautifulSoup(item, "html.parser")
