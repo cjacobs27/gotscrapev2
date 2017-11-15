@@ -23,10 +23,10 @@ class Character(models.Model):
     # get gender split
     def get_gender_split(self):
         number_of_women = Character.objects.filter(gender_id='2').count()
-        number_of_men = Character.objects.filter(gender_id = '1').count()
+        number_of_men = Character.objects.filter(gender_id='1').count()
         total_people = number_of_men + number_of_women
-        female_percentage = round((number_of_women / total_people)*100, 2)
-        male_percentage = round((number_of_men / total_people)*100, 2)
+        female_percentage = round((number_of_women / total_people) * 100, 2)
+        male_percentage = round((number_of_men / total_people) * 100, 2)
         print(female_percentage,male_percentage)
         percentages = [female_percentage, male_percentage]
         return percentages
