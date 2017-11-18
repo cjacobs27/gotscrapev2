@@ -16,7 +16,7 @@ def update(request):
     u = Update()
     u.generate_links()
     u.link_scrape()
-    u.CharacterModelUpdate()
+    u.character_model_update()
     i = Infoscrape()
     i.encode_gender_and_update()
 
