@@ -34,8 +34,26 @@ to update the database again, or to see the info in it, go to:
 Here you'll see the list of characters with links to their Wikipedia pages,
 along with their gender info.
 
-Additional information about characters will be available soon, with the idea of generating
-graphs of the character data in the app.
+Here's a guide to what pages do so far:
+-
+
+`http://localhost:8000/gotsv2`
+
+View list of names of the Characters that are already in the database: names are displayed
+as links to the URLs of character pages. Gender is also listed & more info will
+be available in the future.
+
+`http://localhost:8000/gotsv2/update`
+
+Updates the database with freshly scraped data - only adds records which are new to
+the database, eg. if a new Character Page is published, it will
+bring the relevant info into the database. At the moment each record is printed to the terminal
+to show whether it is 'already in there' or 'just added'.
+
+`http://localhost:8000/gotsv2/graph`
+
+Generates and displays a gender split pie chart. More graphs will be
+available to choose from soon.
 
 This has been a project to help me learn about automated web scraping,
 Django, and SQLite databases.
