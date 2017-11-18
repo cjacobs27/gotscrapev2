@@ -40,8 +40,7 @@ Here's a guide to what pages do so far:
 `http://localhost:8000/gotsv2`
 
 View list of names of the Characters that are already in the database: names are displayed
-as links to the URLs of character pages. Gender is also listed & more info will
-be available in the future.
+as links to the URLs of character pages. Gender and Titles are also listed.
 
 `http://localhost:8000/gotsv2/update`
 
