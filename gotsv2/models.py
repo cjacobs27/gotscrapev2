@@ -1,4 +1,5 @@
 from django.db import models
+import json
 
 
 class Gender(models.Model):
@@ -27,8 +28,8 @@ class Character(models.Model):
         total_people = number_of_men + number_of_women
         female_percentage = round((number_of_women / total_people) * 100, 2)
         male_percentage = round((number_of_men / total_people) * 100, 2)
-        print(female_percentage,male_percentage)
-        percentages = [female_percentage, male_percentage]
-        return percentages
+        json_percentages = json.JSONEncoder().encode([female_percentage, male_percentage])
+        print(json_percentages)
+        return json_percentages
 
 

@@ -27,7 +27,7 @@ def update(request):
 def graph(request):
     #call get_gender_split()
     c = Character()
-    percentages = c.get_gender_split()
-    context = {'percentages': percentages}
+    json_percentages = c.get_gender_split()
+    context = {'percentages': json_percentages}
     # render graph template
     return render(request, 'gotsv2/graph.html', context)
