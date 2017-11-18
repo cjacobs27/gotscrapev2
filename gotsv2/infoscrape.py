@@ -7,10 +7,10 @@ class Infoscrape:
         self.genders = []
         self.unencodedGender = []
         self.titles = []
-        self.dbCharacterObjects = Character.objects.values_list('infobox', flat=True)
+        self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
 
     def gender_text_scrape(self):
-        for item in self.dbCharacterObjects:
+        for item in self.db_character_infoboxes:
             html = BeautifulSoup(item, "html.parser")
             table_rows = html.find_all('tr')
             for row in table_rows:
@@ -41,24 +41,37 @@ class Infoscrape:
 #right, now let's do the same for titles
 
     def title_text_scrape(self):
-        for item in self.dbCharacterObjects:
-            html = BeautifulSoup(item, "html.parser")
+        for i in Character.objects.all():
+            infobox = i.infobox
+            html = BeautifulSoup(infobox, "html.parser")
             table_rows = html.find_all('tr')
             for row in table_rows:
                 header = row.find('th', {'scope': 'row'}, 'Title')
-                value = row.find('ul')
-                if "Title" in str(header):
-                    try:
-                        single_character_titles = value.text
-                        print(single_character_titles)
-                        self.titles.append(single_character_titles)
-                    except AttributeError:
-                        print(value)
+                try:
+                    if 'Title' in header.text:
+                        # value = row.find('ul')
+                        value = row.find('ul').text
+                        print(value, "...THAT WAS THE VALUE (their titles)")
+                        # code just ignores next line... idk
+                        i.titles.save(value)
+                    else:
                         pass
-                else:
+                except AttributeError:
                     pass
-        print(self.titles)
-        print(len(self.titles))
+
+# previous idea:
+        #         if "Title" in str(header):
+        #             try:
+        #                 single_character_titles = value.text
+        #                 print(single_character_titles)
+        #                 self.titles.append(single_character_titles)
+        #             except AttributeError:
+        #                 # print(value)
+        #                 pass
+        #         else:
+        #             pass
+        # print(self.titles)
+        # print(len(self.titles))
 
 
     # def update_character_model_with_title_lists(self):
@@ -66,8 +79,8 @@ class Infoscrape:
     #     for i in Character.objects.all():
     #         update_title = self.titles[a]
     #         i.titles = update_title
-    #         print(i.titles)
-    #         print(update_title)
+    #         i.titles.save()
+
 
     def scrape_titles_and_update_model(self):
         self.title_text_scrape()
