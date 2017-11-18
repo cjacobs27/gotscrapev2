@@ -42,6 +42,7 @@ class Infoscrape:
 
     def title_text_scrape(self):
         for character in Character.objects.all():
+            print(character.name)
             infobox = character.infobox
             html = BeautifulSoup(infobox, "html.parser")
             table_rows = html.find_all('tr')
@@ -50,7 +51,7 @@ class Infoscrape:
                 try:
                     if 'Title' in header.text:
                         # value = row.find('ul')
-                        value = row.find('ul').text
+                        value = row.find('td').text
                         print(value, "...THAT WAS THE VALUE (their titles)")
                         # code just ignores next line... idk
                         character.titles = value
