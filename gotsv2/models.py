@@ -17,6 +17,7 @@ class Character(models.Model):
     created_at = models.DateTimeField('created')
     updated_at = models.DateTimeField('last updated')
     gender = models.ForeignKey(Gender, default=1)
+    titles = models.TextField(default=None)
 
     def __str__(self):
         return self.name
