@@ -41,8 +41,8 @@ class Infoscrape:
 #right, now let's do the same for titles
 
     def title_text_scrape(self):
-        for i in Character.objects.all():
-            infobox = i.infobox
+        for character in Character.objects.all():
+            infobox = character.infobox
             html = BeautifulSoup(infobox, "html.parser")
             table_rows = html.find_all('tr')
             for row in table_rows:
@@ -53,7 +53,8 @@ class Infoscrape:
                         value = row.find('ul').text
                         print(value, "...THAT WAS THE VALUE (their titles)")
                         # code just ignores next line... idk
-                        i.titles.save(value)
+                        character.titles = value
+                        character.save()
                     else:
                         pass
                 except AttributeError:
