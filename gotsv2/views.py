@@ -29,6 +29,8 @@ def graph(request):
     #call get_gender_split()
     c = Character()
     json_percentages = c.get_gender_split()
-    context = {'percentages': json_percentages}
+    title_numbers = c.get_title_numbers()
+    context1 = {'percentages': json_percentages}
+    context2 = {'title_numbers': title_numbers}
     # render graph template
-    return render(request, 'gotsv2/graph.html', context)
+    return render(request, 'gotsv2/graph.html', context1, context2)

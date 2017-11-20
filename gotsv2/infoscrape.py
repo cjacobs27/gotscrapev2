@@ -63,9 +63,7 @@ class Infoscrape:
     #     encode_titles_json()
     #     titles_update_model()
 
-
     def scrape_titles_and_update_model(self):
-        all_chars_clean_titles_as_items_in_list = []
         for character in Character.objects.all():
             print("CHARACTER: ", character.name)
             infobox = character.infobox
@@ -79,22 +77,25 @@ class Infoscrape:
                         print("VALUE: ", value)
                         titles_as_items_in_list = value.split("\n")
                         clean_titles = []
+                        clean_titles_dict = {}
                         for title in titles_as_items_in_list:
                             if title == "":
                                 pass
                             else:
                                 clean_titles.append(title)
-                                pass
-                        # all_chars_clean_titles_as_items_in_list.append(clean_titles)
-                        # print("TITLE var: ", title)
-
-                        print("clean_titles: ", clean_titles)
-                        # print("all_chars_clean_titles_as_names_in_list: ", all_chars_clean_titles_as_items_in_list)
-                        # THESE NEED TO BE JSON OBJECTS NOT STRINGS OTHERWISE CAN'T COUNT THEM
-                        json_encoded_titles = json.JSONEncoder().encode([clean_titles])
-                        print("json_encoded_titles: ", json_encoded_titles)
-                        character.titles = json_encoded_titles
-                        character.save()
+                        a = 0
+                        for item in clean_titles:
+                            key = 'title'+str(a)
+                            clean_titles_dict.update({key: item})
+                            a = a + 1
+                        print(clean_titles_dict)
+                        print(type(clean_titles_dict))
+                        # THESE NEED TO BE JSON OBJECTS NOT STRINGS OTHERWISE CAN'T COUNT THEM FROM DB
+                        json_encoded_titles = json.dumps(clean_titles_dict)
+                        # this is a string??? I give up
+                        print(type(json_encoded_titles))
+                        # character.titles = json_encoded_titles
+                        # character.save()
                     else:
                         pass
                 except AttributeError:
