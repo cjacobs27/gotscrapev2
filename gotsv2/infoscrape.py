@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from gotsv2.models import Character, Gender
 import json
-import re
 
 
 class Infoscrape:
@@ -65,7 +64,7 @@ class Infoscrape:
 
     def scrape_titles_and_update_model(self):
         for character in Character.objects.all():
-            print("CHARACTER: ", character.name)
+            # print("CHARACTER: ", character.name)
             infobox = character.infobox
             html = BeautifulSoup(infobox, "html.parser")
             table_rows = html.find_all('tr')
@@ -74,7 +73,7 @@ class Infoscrape:
                 try:
                     if 'Title' in header.text:
                         value = row.find('td').text
-                        print("VALUE: ", value)
+                        # print("VALUE: ", value)
                         titles_as_items_in_list = value.split("\n")
                         clean_titles = []
                         clean_titles_dict = {}
@@ -83,18 +82,8 @@ class Infoscrape:
                                 pass
                             else:
                                 clean_titles.append(title)
-                        a = 0
-                        for item in clean_titles:
-                            key = 'title'+str(a)
-                            clean_titles_dict.update({key: item})
-                            a = a + 1
-                        print(clean_titles_dict)
-                        print(type(clean_titles_dict))
-                        # THESE NEED TO BE JSON OBJECTS NOT STRINGS OTHERWISE CAN'T COUNT THEM FROM DB
-                        # json_encoded_titles = json.dumps(clean_titles_dict)
-                        # this is a string??? I give up
-                        # print(type(json_encoded_titles))
-                        json_encoded_titles = json.dumps(clean_titles_dict)
+                        clean_titles_dict.update({'titles': clean_titles})
+                        json_encoded_titles = json.JSONEncoder().encode(clean_titles_dict)
                         character.titles = json_encoded_titles
                         character.save()
                     else:

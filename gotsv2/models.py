@@ -36,8 +36,12 @@ class Character(models.Model):
     def get_title_numbers(self):
         for character in Character.objects.all():
             json_object = character.titles
-            character_titles_as_dict = json.JSONDecoder.decode(json_object)
-            print(character_titles_as_dict)
+            if json_object == "":
+                pass
+            else:
+                decoded_character_title = json.JSONDecoder().decode(json_object)
+                print(character.name, len(decoded_character_title.get('titles')))
+
 
 
 
