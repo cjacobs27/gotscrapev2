@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 from gotsv2.models import Character, Gender
+import json
+import re
 
 
 class Infoscrape:
@@ -38,11 +40,34 @@ class Infoscrape:
         self.gender_text_scrape()
         self.label_male_and_female()
 
-#right, now let's do the same for titles
+# right, now let's do the same for titles (possibly a better way of doing this below
+
+    # def split_titles(self, value):
+    #
+    # def scrape_titles(self):
+    #     for character in Character.objects.all():
+    #         print("CHARACTER: ", character.name)
+    #         infobox = character.infobox
+    #         html = BeautifulSoup(infobox, "html.parser")
+    #         table_rows = html.find_all('tr')
+    #         for row in table_rows:
+    #             header = row.find('th', {'scope': 'row'}, 'Title')
+    #             try:
+    #                 if 'Title' in header.text:
+    #                     value = row.find('td').text
+    #                     split_titles(value)
+    #
+    # def scrape_titles_encode_json_update_model:
+    #     scrape_titles()
+    #     split_titles()
+    #     encode_titles_json()
+    #     titles_update_model()
+
 
     def scrape_titles_and_update_model(self):
+        all_chars_clean_titles_as_items_in_list = []
         for character in Character.objects.all():
-            print(character.name)
+            print("CHARACTER: ", character.name)
             infobox = character.infobox
             html = BeautifulSoup(infobox, "html.parser")
             table_rows = html.find_all('tr')
@@ -51,9 +76,27 @@ class Infoscrape:
                 try:
                     if 'Title' in header.text:
                         value = row.find('td').text
-                        character.titles = value
+                        print("VALUE: ", value)
+                        titles_as_items_in_list = value.split("\n")
+                        clean_titles = []
+                        for title in titles_as_items_in_list:
+                            if title == "":
+                                pass
+                            else:
+                                clean_titles.append(title)
+                                pass
+                        # all_chars_clean_titles_as_items_in_list.append(clean_titles)
+                        # print("TITLE var: ", title)
+
+                        print("clean_titles: ", clean_titles)
+                        # print("all_chars_clean_titles_as_names_in_list: ", all_chars_clean_titles_as_items_in_list)
+                        # THESE NEED TO BE JSON OBJECTS NOT STRINGS OTHERWISE CAN'T COUNT THEM
+                        json_encoded_titles = json.JSONEncoder().encode([clean_titles])
+                        print("json_encoded_titles: ", json_encoded_titles)
+                        character.titles = json_encoded_titles
                         character.save()
                     else:
                         pass
                 except AttributeError:
                     pass
+

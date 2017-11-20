@@ -33,4 +33,9 @@ class Character(models.Model):
         print(json_percentages)
         return json_percentages
 
+    # def get_title_numbers(self):
+        # graph will take a) the name list b) the number of titles for each name
+        # this is why the titles need to be encoded as a json
+
+
 
