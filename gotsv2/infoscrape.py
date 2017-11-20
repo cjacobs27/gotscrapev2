@@ -91,11 +91,12 @@ class Infoscrape:
                         print(clean_titles_dict)
                         print(type(clean_titles_dict))
                         # THESE NEED TO BE JSON OBJECTS NOT STRINGS OTHERWISE CAN'T COUNT THEM FROM DB
-                        json_encoded_titles = json.dumps(clean_titles_dict)
+                        # json_encoded_titles = json.dumps(clean_titles_dict)
                         # this is a string??? I give up
-                        print(type(json_encoded_titles))
-                        # character.titles = json_encoded_titles
-                        # character.save()
+                        # print(type(json_encoded_titles))
+                        json_encoded_titles = json.dumps(clean_titles_dict)
+                        character.titles = json_encoded_titles
+                        character.save()
                     else:
                         pass
                 except AttributeError:

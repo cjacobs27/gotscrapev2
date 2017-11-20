@@ -34,18 +34,10 @@ class Character(models.Model):
         return json_percentages
 
     def get_title_numbers(self):
-        title_numbers_dict = {}
         for character in Character.objects.all():
-            # this will not work unless title data saved into model as a JSON OBJECT somehow.
-            number_of_titles = len(titles_as_list)
-            print(type(number_of_titles))
-            # print(number_of_titles)
-            dict_name_and_number_of_titles = dict([(character.name, number_of_titles)])
-            title_numbers_dict.update(dict_name_and_number_of_titles)
-        print(title_numbers_dict)
-        return title_numbers_dict
-        # json_object_char_name_with_number_of_titles = blah
-        # return json_object_char_name_with_number_of_titles
+            json_object = character.titles
+            character_titles_as_dict = json.JSONDecoder.decode(json_object)
+            print(character_titles_as_dict)
 
 
 

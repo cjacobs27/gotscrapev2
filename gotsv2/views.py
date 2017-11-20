@@ -17,9 +17,9 @@ def update(request):
     # u.generate_links()
     # u.link_scrape()
     # u.character_model_update()
-    i = Infoscrape()
+    # i = Infoscrape()
     # i.encode_gender_and_update()
-    i.scrape_titles_and_update_model()
+    # i.scrape_titles_and_update_model()
 
     # Only after the scripts have run will a response be sent to the client.
     # This template will be rendered:
@@ -32,5 +32,6 @@ def graph(request):
     title_numbers = c.get_title_numbers()
     context1 = {'percentages': json_percentages}
     context2 = {'title_numbers': title_numbers}
+    print(title_numbers)
     # render graph template
     return render(request, 'gotsv2/graph.html', context1, context2)
