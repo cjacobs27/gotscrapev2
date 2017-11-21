@@ -4,6 +4,7 @@ from .models import Character,Gender
 from .update import Update
 from .infoscrape import Infoscrape
 import json
+import random
 
 
 # Create your views here.
@@ -27,19 +28,22 @@ def update(request):
     return render(request, 'gotsv2/update.html')
 
 def graph(request):
-    #call get_gender_split()
     c = Character()
     json_percentages = c.get_gender_split()
-
-    # names = json.dumps(c.get_character_names())
     names = c.get_character_names()
     number_of_titles = c.get_title_numbers()
+    random_colour_list = []
+    for colour in range(50):
+        r = lambda: random.randint(0, 255)
+        random_colour = '#%02X%02X%02X' % (r(), r(), r())
+        random_colour_list.append(random_colour)
+    json_random_colour_list = json.dumps(random_colour_list)
+    print(json_random_colour_list)
     context = {
         'percentages': json_percentages,
-        # 'names': json.JSONDecoder().decode(names),
         'names': json.JSONDecoder().decode(names),
-        # 'names': names,
         'title_numbers': json.JSONDecoder().decode(number_of_titles),
+        'random_colours': json.JSONDecoder().decode(json_random_colour_list)
     }
-    print(names)
+
     return render(request, 'gotsv2/graph.html', context)
