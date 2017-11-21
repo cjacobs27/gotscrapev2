@@ -54,8 +54,6 @@
         data: data
     });
 </script>
-    <!--below works because of course it does-->
-      <!--labels: ['what','the','fuck','do','you','want'],-->
 <script type="text/javascript">
   new Chart(document.getElementById("titlesGraph"), {
     type: 'horizontalBar',
@@ -64,7 +62,6 @@
       datasets: [
         {
           label: "Titles: 8",
-          <!--backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],-->
           backgroundColor: {{ random_colours|safe }},
           data: {{ title_numbers }}
         }
