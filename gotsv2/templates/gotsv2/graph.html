@@ -16,6 +16,10 @@
     <h1>GRAPH PAGE</h1>
     <canvas id="genderGraph" width="500" height="300"></canvas>
 </div>
+<br>
+<div class="container">
+  <canvas id="titlesGraph" width="500" height="300"></canvas>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -49,6 +53,30 @@
         type: 'pie',
         data: data
     });
+</script>
+    <!--below works because of course it does-->
+      <!--labels: ['what','the','fuck','do','you','want'],-->
+<script type="text/javascript">
+  new Chart(document.getElementById("titlesGraph"), {
+    type: 'horizontalBar',
+    data: {
+      labels: {{ names|safe }},
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: {{ title_numbers }}
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Games of Thrones Characters by Number of Titles'
+      }
+    }
+});
 </script>
 </body>
 </html>

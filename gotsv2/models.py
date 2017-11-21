@@ -17,7 +17,7 @@ class Character(models.Model):
     created_at = models.DateTimeField('created')
     updated_at = models.DateTimeField('last updated')
     gender = models.ForeignKey(Gender, default=1)
-    titles = models.TextField(null= True, default=None)
+    titles = models.TextField(null=True, default=None)
 
     def __str__(self):
         return self.name
@@ -30,17 +30,39 @@ class Character(models.Model):
         female_percentage = round((number_of_women / total_people) * 100, 2)
         male_percentage = round((number_of_men / total_people) * 100, 2)
         json_percentages = json.JSONEncoder().encode([female_percentage, male_percentage])
-        print(json_percentages)
         return json_percentages
 
     def get_title_numbers(self):
+        number_of_titles_dict = {}
+        number_of_titles_list = []
         for character in Character.objects.all():
             json_object = character.titles
             if json_object == "":
                 pass
+            elif json_object is None:
+                number_of_titles_list.append(0)
             else:
                 decoded_character_title = json.JSONDecoder().decode(json_object)
-                print(character.name, len(decoded_character_title.get('titles')))
+                number_of_titles = len(decoded_character_title.get('titles'))
+                number_of_titles_list.append(number_of_titles)
+                #  number_of_titles_dict.update({character.name:number_of_titles})
+                # print(character.name, len(decoded_character_title.get('titles')))
+        # return number_of_titles_dict
+        encoded_number_of_titles_list = json.dumps(number_of_titles_list)
+        return encoded_number_of_titles_list
+
+    def get_character_names(self):
+        names = []
+        for character in Character.objects.all():
+            name = character.name
+            # minilist = []
+            # minilist.append(name)
+            # names.append(minilist)
+            names.append(name)
+        names_encoded = json.dumps(names)
+        return names_encoded
+        # return names
+
 
 
 

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Character,Gender
 from .update import Update
 from .infoscrape import Infoscrape
+import json
 
 
 # Create your views here.
@@ -29,9 +30,16 @@ def graph(request):
     #call get_gender_split()
     c = Character()
     json_percentages = c.get_gender_split()
-    title_numbers = c.get_title_numbers()
-    context1 = {'percentages': json_percentages}
-    context2 = {'title_numbers': title_numbers}
-    # print(title_numbers)
-    # render graph template
-    return render(request, 'gotsv2/graph.html', context1, context2)
+
+    # names = json.dumps(c.get_character_names())
+    names = c.get_character_names()
+    number_of_titles = c.get_title_numbers()
+    context = {
+        'percentages': json_percentages,
+        # 'names': json.JSONDecoder().decode(names),
+        'names': json.JSONDecoder().decode(names),
+        # 'names': names,
+        'title_numbers': json.JSONDecoder().decode(number_of_titles),
+    }
+    print(names)
+    return render(request, 'gotsv2/graph.html', context)
