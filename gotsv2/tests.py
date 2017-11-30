@@ -56,7 +56,7 @@ class UpdateMethodTests(TestCase):
     #                     check_list.append(0)
     #                     info_list.append("")
     #                 else:
-    #                     Update().getinfobox(item)
+    #                     Update().get_infobox(item)
     #             except:
     #                 check_list.append(0)
     #                 info_list.append("")

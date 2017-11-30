@@ -14,11 +14,12 @@
 <body>
 <div class="container">
     <h1>GRAPH PAGE</h1>
-    Graph goes here
-    INFO:
-    {{ percentages }}
-    GRAPH BELOW
+    <a class="btn btn-primary" href="/gotsv2/gender-graph/" role="button">Gender Split Graph</a>
     <canvas id="genderGraph" width="500" height="300"></canvas>
+</div>
+<br>
+<div class="container">
+  <canvas id="titlesGraph" width="500" height="300"></canvas>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -53,6 +54,28 @@
         type: 'pie',
         data: data
     });
+</script>
+<script type="text/javascript">
+  new Chart(document.getElementById("titlesGraph"), {
+    type: 'horizontalBar',
+    data: {
+      labels: {{ names|safe }},
+      datasets: [
+        {
+          label: "Titles: 8",
+          backgroundColor: {{ random_colours|safe }},
+          data: {{ title_numbers }}
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Games of Thrones Characters by Number of Titles'
+      }
+    }
+});
 </script>
 </body>
 </html>

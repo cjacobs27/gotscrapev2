@@ -70,7 +70,7 @@ class Update:
                         self.check_list.append(0)
                         self.info_list.append("")
                     else:
-                        self.getinfobox(item)
+                        self.get_infobox(item)
                 except:
                     self.check_list.append(0)
                     self.info_list.append("")
@@ -105,7 +105,7 @@ class Update:
             self.check_list.append(0)
             self.info_list.append("")
 
-    def getinfobox(self, item):
+    def get_infobox(self, item):
         try:
             table = soup2.find_all(("table", {"class:", "infobox"}))
             infobox = table[0].encode('utf-8').strip()
@@ -113,12 +113,12 @@ class Update:
                 self.check_list.append(1)
                 self.info_list.append(infobox)
             else:
-                self.refineinfobox(item, table)
+                self.refine_infobox(item, table)
         except:
             self.check_list.append(0)
             self.info_list.append("")
 
-    def refineinfobox(self, item, table):
+    def refine_infobox(self, item, table):
         t = False
         for i in range(4):
             if "infobox" in str(table[i]):
@@ -134,7 +134,7 @@ class Update:
             self.check_list.append(0)
             self.info_list.append("")
 
-    def CharacterModelUpdate(self):
+    def character_model_update(self):
         unordered_df = pandas.DataFrame(
             {'Names': self.name_list,
              'URLs': self.link_list,
@@ -146,7 +146,7 @@ class Update:
             m = Character(name=df['Names'][a], url=df['URLs'][a], page=df['Pages'][a], infobox=df['Infoboxes'][a], created_at=timezone.now(), updated_at=timezone.now())
             if df['Pages'][a] == 1:
                 u = df['URLs'][a]
-                if self.CheckForUpdateDuplicates(u) is True:
+                if self.check_for_update_duplicates(u) is True:
                     print(u, " already in there    (", item ,")")
                 else:
                     print(u, " will be added    (", item ,")")
@@ -155,7 +155,7 @@ class Update:
                 pass
             a = a + 1
 
-    def CheckForUpdateDuplicates(self,u):
+    def check_for_update_duplicates(self, u):
         try:
             Character.objects.get(url=u)
             return True

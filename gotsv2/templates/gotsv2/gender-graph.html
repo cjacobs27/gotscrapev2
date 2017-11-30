@@ -13,32 +13,14 @@
 
 <body>
 <div class="container">
-    <h1>HELLO WORLD</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Character Name</th>
-            <th scope="col">Gender</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for character in characters %}
-            <tr>
-                <td>
-                    <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
-                </td>
-                <td>
-                    {{ character.gender }}
-                </td>
-                <td>
-                    {{ character.titles }}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h1>GENDER GRAPH PAGE</h1>
+    <a class="btn btn-primary" href="/gotsv2/graph/" role="button">Return to Graph Page</a>
+    <canvas id="genderGraph" width="500" height="300"></canvas>
 </div>
-
+<br>
+<div class="container">
+  <canvas id="titlesGraph" width="500" height="300"></canvas>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -49,5 +31,30 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById("genderGraph");
+    var data = {
+        datasets: [{
+            data: {{ percentages }},
+            backgroundColor: [
+                '#ef4810',
+                '#68b8ff'
+            ]
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Women',
+            'Men'
+        ],
+
+    };
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data
+    });
+</script>
+
 </body>
 </html>
