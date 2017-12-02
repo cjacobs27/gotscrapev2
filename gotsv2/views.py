@@ -56,8 +56,8 @@ def gender_graph_page(request):
     names = c.get_character_names()
     number_of_titles = c.get_title_numbers()
     context = {
+        'percentages': json_percentages,
         'names': json.JSONDecoder().decode(names),
-        'title_numbers': json.JSONDecoder().decode(number_of_titles),
     }
 
     return render(request, 'gotsv2/gender-graph.html', context)

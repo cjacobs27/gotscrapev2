@@ -16,11 +16,6 @@
     <h1>GRAPH PAGE</h1>
     <a class="btn btn-primary" href="/gotsv2/gender-graph/" role="button">Gender Split Graph</a>
     <a class="btn btn-primary" href="/gotsv2/title-graph/" role="button">Title Graph</a>
-    <canvas id="genderGraph" width="500" height="300"></canvas>
-</div>
-<br>
-<div class="container">
-  <canvas id="titlesGraph" width="500" height="300"></canvas>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -33,50 +28,6 @@
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    var ctx = document.getElementById("genderGraph");
-    var data = {
-        datasets: [{
-            data: {{ percentages }},
-            backgroundColor: [
-                '#ef4810',
-                '#68b8ff'
-            ]
-        }],
 
-        // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: [
-            'Women',
-            'Men'
-        ],
-
-    };
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: data
-    });
-</script>
-<script type="text/javascript">
-  new Chart(document.getElementById("titlesGraph"), {
-    type: 'horizontalBar',
-    data: {
-      labels: {{ names|safe }},
-      datasets: [
-        {
-          label: "Titles: 8",
-          backgroundColor: {{ random_colours|safe }},
-          data: {{ title_numbers }}
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Games of Thrones Characters by Number of Titles'
-      }
-    }
-});
-</script>
 </body>
 </html>
