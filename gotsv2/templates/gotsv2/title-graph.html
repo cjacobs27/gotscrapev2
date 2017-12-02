@@ -39,13 +39,20 @@
       labels: {{ names|safe }},
       datasets: [
         {
-          label: "Titles: 8",
+          label: "Titles",
           backgroundColor: {{ random_colours|safe }},
           data: {{ title_numbers }}
         }
       ]
     },
     options: {
+      scales: {
+        xAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
       legend: { display: false },
       title: {
         display: true,
