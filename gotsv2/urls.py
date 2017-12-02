@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^update/', views.update, name='runupdate'),
     url(r'^graph/', views.graph, name='graph'),
-    url(r'^gender-graph/',views.gender_graph_page, name='gender-graph')
+    url(r'^gender-graph/',views.gender_graph_page, name='gender-graph'),
+    url(r'^title-graph/',views.title_graph_page, name='title-graph')
 ]
