@@ -13,9 +13,8 @@
 
 <body>
 <div class="container">
-    <h1>GRAPH PAGE</h1>
-    <a class="btn btn-primary" href="/gotsv2/gender-graph/" role="button">Gender Split Graph</a>
-    <a class="btn btn-primary" href="/gotsv2/title-graph/" role="button">Title Graph</a>
+    <h1>GENDER GRAPH PAGE</h1>
+    <a class="btn btn-primary" href="/gotsv2/graph/" role="button">Return to Graph Page</a>
     <canvas id="genderGraph" width="500" height="300"></canvas>
 </div>
 <br>
@@ -56,27 +55,6 @@
         data: data
     });
 </script>
-<script type="text/javascript">
-  new Chart(document.getElementById("titlesGraph"), {
-    type: 'horizontalBar',
-    data: {
-      labels: {{ names|safe }},
-      datasets: [
-        {
-          label: "Titles: 8",
-          backgroundColor: {{ random_colours|safe }},
-          data: {{ title_numbers }}
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Games of Thrones Characters by Number of Titles'
-      }
-    }
-});
-</script>
+
 </body>
 </html>
