@@ -28,6 +28,7 @@ body {
         <tr>
             <th scope="col">Character Name</th>
             <th scope="col">Gender</th>
+            <th scope="col">Titles</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +38,7 @@ body {
                     <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
                 </td>
                 <td>
-                    {{ character.gender }}
+                    {{ characters_gender }}
                 </td>
                 <td>
                     {{ character.titles }}
