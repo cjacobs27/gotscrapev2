@@ -10,11 +10,8 @@ import random
 # Create your views here.
 def index(request):
     characters = Character.objects.all()
-    # characters_gender_ids = Character.objects.values_list('gender_id', flat=True)
-    characters_gender_ids = Character.gender
-    context = {'characters': characters,
-               'characters_gender': characters_gender_ids
-               }
+    context = {'characters': characters
+                }
     return render(request, 'gotsv2/index.html', context)
 
 
