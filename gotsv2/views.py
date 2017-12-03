@@ -10,11 +10,10 @@ import random
 # Create your views here.
 def index(request):
     characters = Character.objects.all()
-    characters_gender_ids = Character.objects.values_list('gender_id', flat=True)
-    print(characters_gender_ids)
+    # characters_gender_ids = Character.objects.values_list('gender_id', flat=True)
+    characters_gender_ids = Character.gender
     context = {'characters': characters,
                'characters_gender': characters_gender_ids
-               # 'characters_gender': "whats updog"
                }
     return render(request, 'gotsv2/index.html', context)
 
@@ -59,7 +58,7 @@ def gender_graph_page(request):
     c = Character()
     json_percentages = c.get_gender_split()
     names = c.get_character_names()
-    number_of_titles = c.get_title_numbers()
+    # number_of_titles = c.get_title_numbers()
     context = {
         'percentages': json_percentages,
         'names': json.JSONDecoder().decode(names),
