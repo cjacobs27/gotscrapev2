@@ -6,7 +6,7 @@
     <title>Game of Thrones Info</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
@@ -22,31 +22,38 @@ body {
     <h1>Game of Thrones Info Graphs</h1>
 
     <a class="btn btn-primary" href="/gotsv2/graph/" role="button">View Graphs</a>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Character Name</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Titles</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for character in characters %}
+  <div class="w3-container">
+  <div class="w3-panel w3-card w3-blue">
+      <table class="table">
+            <thead>
             <tr>
-                <td>
-                    <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
-                </td>
-                <td>
-                    {{ characters_gender }}
-                </td>
-                <td>
-                    {{ character.titles }}
-                </td>
+                <th scope="col">Character Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Titles</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for character in characters %}
+                <tr>
+                    <td>
+                      <div class="w3-container">
+                      <div class="w3-panel w3-card w3-orange">
+                        <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
+                                  </div>
+                                  </div>
+                    </td>
+                    <td>
+                        {{ characters_gender }}
+                    </td>
+                    <td>
+                        {{ character.titles }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+      </div>
+  </div>
 </div>
 
 
