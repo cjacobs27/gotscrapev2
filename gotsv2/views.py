@@ -14,6 +14,9 @@ def index(request):
                 }
     return render(request, 'gotsv2/index.html', context)
 
+def about(request):
+
+    return render(request, 'gotsv2/about.html')
 
 def update(request):
     u = Update()
