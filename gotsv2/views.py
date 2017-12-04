@@ -4,6 +4,7 @@ from .models import Character,Gender
 from .update import Update
 from .infoscrape import Infoscrape
 import json
+from django.core import serializers
 import random
 
 
@@ -14,9 +15,11 @@ def index(request):
                 }
     return render(request, 'gotsv2/index.html', context)
 
+
 def about(request):
 
     return render(request, 'gotsv2/about.html')
+
 
 def update(request):
     u = Update()
@@ -60,7 +63,6 @@ def gender_graph_page(request):
     c = Character()
     json_percentages = c.get_gender_split()
     names = c.get_character_names()
-    # number_of_titles = c.get_title_numbers()
     context = {
         'percentages': json_percentages,
         'names': json.JSONDecoder().decode(names),
