@@ -3,7 +3,7 @@ from django.utils import timezone
 import pandas
 import re
 from bs4 import BeautifulSoup
-from .models import Character
+from .models import Character, Gender
 
 
 class Update:
@@ -154,6 +154,12 @@ class Update:
             else:
                 pass
             a = a + 1
+
+    def gender_foreign_key_init(self):
+        gender_foreign_key_1 = Gender(id=1, name='Male')
+        gender_foreign_key_2 = Gender(id=2, name='Female')
+        gender_foreign_key_1.save()
+        gender_foreign_key_2.save()
 
     def check_for_update_duplicates(self, u):
         try:

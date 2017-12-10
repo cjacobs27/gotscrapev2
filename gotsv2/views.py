@@ -4,31 +4,35 @@ from .models import Character,Gender
 from .update import Update
 from .infoscrape import Infoscrape
 import json
+from django.core import serializers
 import random
 
 
 # Create your views here.
 def index(request):
     characters = Character.objects.all()
-    characters_gender_ids = Character.objects.values_list('gender_id', flat=True)
-    print(characters_gender_ids)
-    context = {'characters': characters,
-               'characters_gender': characters_gender_ids
-               # 'characters_gender': "whats updog"
-               }
+    context = {'characters': characters
+                }
     return render(request, 'gotsv2/index.html', context)
 
 
+def about(request):
+
+    return render(request, 'gotsv2/about.html')
+
+
 def update(request):
-    # u = Update()
-    # u.generate_links()
-    # u.link_scrape()
-    # u.character_model_update()
+    u = Update()
+    u.gender_foreign_key_init()
+    u.generate_links()
+    u.link_scrape()
+    u.character_model_update()
     i = Infoscrape()
-    # i.encode_gender_and_update()
+    i.encode_gender_and_update()
     i.scrape_titles_and_update_model()
 
     # Only after the scripts have run will a response be sent to the client.
+    print("Updated")
     # This template will be rendered:
     return render(request, 'gotsv2/update.html')
 
@@ -59,7 +63,6 @@ def gender_graph_page(request):
     c = Character()
     json_percentages = c.get_gender_split()
     names = c.get_character_names()
-    number_of_titles = c.get_title_numbers()
     context = {
         'percentages': json_percentages,
         'names': json.JSONDecoder().decode(names),

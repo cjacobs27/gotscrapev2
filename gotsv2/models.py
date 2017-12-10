@@ -16,7 +16,7 @@ class Character(models.Model):
     infobox = models.TextField()
     created_at = models.DateTimeField('created')
     updated_at = models.DateTimeField('last updated')
-    gender = models.ForeignKey(Gender, default=1)
+    gender = models.ForeignKey(Gender)
     titles = models.TextField(null=True, default=None)
 
     def __str__(self):
@@ -33,7 +33,6 @@ class Character(models.Model):
         return json_percentages
 
     def get_title_numbers(self):
-        number_of_titles_dict = {}
         number_of_titles_list = []
         for character in Character.objects.all():
             json_object = character.titles
@@ -45,9 +44,6 @@ class Character(models.Model):
                 decoded_character_title = json.JSONDecoder().decode(json_object)
                 number_of_titles = len(decoded_character_title.get('titles'))
                 number_of_titles_list.append(number_of_titles)
-                #  number_of_titles_dict.update({character.name:number_of_titles})
-                # print(character.name, len(decoded_character_title.get('titles')))
-        # return number_of_titles_dict
         encoded_number_of_titles_list = json.dumps(number_of_titles_list)
         return encoded_number_of_titles_list
 
@@ -55,13 +51,9 @@ class Character(models.Model):
         names = []
         for character in Character.objects.all():
             name = character.name
-            # minilist = []
-            # minilist.append(name)
-            # names.append(minilist)
             names.append(name)
         names_encoded = json.dumps(names)
         return names_encoded
-        # return names
 
 
 
