@@ -6,7 +6,6 @@
     <title>Game of Thrones Info</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
@@ -14,7 +13,22 @@
 <style>
 body {
     background-color: lightblue;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+a {
+    color: orangered;
+}
+
+nav {
+     background-color: #aeebe0;
+  }
+
+div .card {
+          background-color: #0c3133;
+
+  }
+
 </style>
 
 <body>
@@ -39,26 +53,12 @@ body {
             <th scope="col">Titles</th>
         </tr>
         </thead>
-        <tbody>
-        {% for character in characters %}
-            <tr>
-                <td>
-                    <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
-                </td>
-                <td>
-                  {{ character.gender.name }}
-                </td>
-                <td>
-                    {{ character.titles }}
-                </td>
-            </tr>
-            </thead>
             <tbody>
             {% for character in characters %}
                 <tr>
                     <td>
-                      <div class="w3-container">
-                      <div class="w3-panel w3-card w3-orange">
+                        <div class="card card-inverse">
+                        <div class="card-block">
                         <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
                                   </div>
                                   </div>
