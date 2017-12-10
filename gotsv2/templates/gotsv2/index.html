@@ -24,10 +24,29 @@ nav {
      background-color: #aeebe0;
   }
 
-div .card {
-          background-color: #0c3133;
+{#div .card a {#}
+{#              text-align: center;#}
+  {#vertical-align: center;#}
+{#}#}
 
+div .card.card-inverse {
+
+          padding: 1px;
+          background-color: #0c3133;
   }
+
+div .card {
+          padding: 10px;
+          background-color: #aeebe0;
+  }
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+  border-top-width: 0px;
+  border-top-style: solid;
+  border-top-color: #aeebe0;
+}
 
 </style>
 
@@ -59,15 +78,24 @@ div .card {
                     <td>
                         <div class="card card-inverse">
                         <div class="card-block">
+                          <div align="center">
                         <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
+                          </div>
                                   </div>
                                   </div>
                     </td>
                     <td>
-                        {{ character.gender.name }} 
+                      <div class="card">
+                        <div class="card-block">
+                      <div align="center">
+                        {{ character.gender.name }}
+                      </div>
+                        </div>
                     </td>
                     <td>
+                      <div align="left">
                         {{ character.titles }}
+                      </div>
                     </td>
                 </tr>
             {% endfor %}
