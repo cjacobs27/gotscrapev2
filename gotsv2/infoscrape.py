@@ -39,29 +39,6 @@ class Infoscrape:
         self.gender_text_scrape()
         self.label_male_and_female()
 
-# right, now let's do the same for titles (possibly a better way of doing this below
-
-    # def split_titles(self, value):
-    #
-    # def scrape_titles(self):
-    #     for character in Character.objects.all():
-    #         print("CHARACTER: ", character.name)
-    #         infobox = character.infobox
-    #         html = BeautifulSoup(infobox, "html.parser")
-    #         table_rows = html.find_all('tr')
-    #         for row in table_rows:
-    #             header = row.find('th', {'scope': 'row'}, 'Title')
-    #             try:
-    #                 if 'Title' in header.text:
-    #                     value = row.find('td').text
-    #                     split_titles(value)
-    #
-    # def scrape_titles_encode_json_update_model:
-    #     scrape_titles()
-    #     split_titles()
-    #     encode_titles_json()
-    #     titles_update_model()
-
     def scrape_titles_and_update_model(self):
         for character in Character.objects.all():
             # print("CHARACTER: ", character.name)
