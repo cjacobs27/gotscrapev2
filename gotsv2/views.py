@@ -24,14 +24,14 @@ def about(request):
 
 
 def update(request):
-    # u = Update()
-    # u.gender_foreign_key_init()
-    # u.generate_links()
-    # u.link_scrape()
-    # u.character_model_update()
+    u = Update()
+    u.gender_foreign_key_init()
+    u.generate_links()
+    u.link_scrape()
+    u.character_model_update()
     i = Infoscrape()
-    # i.encode_gender_and_update()
-    # i.scrape_titles_and_update_model()
+    i.encode_gender_and_update()
+    i.scrape_titles_and_update_model()
     i.populate_title_strings_model()
 
     # Only after the scripts have run will a response be sent to the client.

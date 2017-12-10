@@ -96,13 +96,10 @@ class Infoscrape:
 
     def populate_title_strings_model(self):
         characters = Character.objects.all()
-        a = 0
         for character in characters:
             titles = json.dumps(character.titles)
             clean_titles = titles.replace(r"\"", "").replace(r"(TV series)", "").replace("{", "").replace("\"", "").replace(r"titles: [",
                                                                                                 "").replace("]}",
                                                                                                             "")
-            print(clean_titles)
-            a = a + 1
             character.title_strings = clean_titles
             character.save()
