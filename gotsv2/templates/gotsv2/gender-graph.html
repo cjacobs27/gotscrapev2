@@ -1,33 +1,23 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Game of Thrones Info</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "gotsv2/base.html" %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
+{% block navbartext %}
 
-<body>
-<div class="container">
-    <h1>GENDER GRAPH PAGE</h1>
-    <a class="btn btn-primary" href="/gotsv2/graph/" role="button">Return to Graph Page</a>
-    <canvas id="genderGraph" width="500" height="300"></canvas>
+Gender split of all main GoT characters
+
+{% endblock %}
+
+{% block gendergraph %}
+<div class="container-fluid">
+<div class="d-flex flex-row-reverse">
+    <div class="p-2">
+      <a class="btn btn-outline-dark rounded-right" href="/gotsv2/graph/" role="button">Return to Graph Page</a>
+    </div>
 </div>
-<br>
+  <div class="row">
+      <canvas id="genderGraph" width="300" height="150"></canvas>
+    </div>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     var ctx = document.getElementById("genderGraph");
@@ -53,5 +43,6 @@
     });
 </script>
 
-</body>
-</html>
+{% endblock %}
+
+
