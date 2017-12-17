@@ -11,8 +11,10 @@ import random
 # Create your views here.
 def index(request):
     characters = Character.objects.all()
-    context = {'characters': characters
-                }
+
+    context = {'characters': characters,
+               # 'clean_titles': clean_titles()
+               }
     return render(request, 'gotsv2/index.html', context)
 
 
@@ -30,6 +32,7 @@ def update(request):
     i = Infoscrape()
     i.encode_gender_and_update()
     i.scrape_titles_and_update_model()
+    i.populate_title_strings_model()
 
     # Only after the scripts have run will a response be sent to the client.
     print("Updated")

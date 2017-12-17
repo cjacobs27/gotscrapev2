@@ -6,10 +6,49 @@
     <title>Game of Thrones Info</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
+
+<style>
+body {
+    background-color: lightblue;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: orangered;
+}
+
+nav {
+     background-color: #aeebe0;
+  }
+
+{#div .card a {#}
+{#              text-align: center;#}
+  {#vertical-align: center;#}
+{#}#}
+
+div .card.card-inverse {
+
+          padding: 1px;
+          background-color: #0c3133;
+  }
+
+div .card {
+          padding: 10px;
+          background-color: #aeebe0;
+  }
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+  border-top-width: 0px;
+  border-top-style: solid;
+  border-top-color: #aeebe0;
+}
+
+</style>
 
 <body>
 
@@ -33,22 +72,43 @@
             <th scope="col">Titles</th>
         </tr>
         </thead>
-        <tbody>
-        {% for character in characters %}
-            <tr>
-                <td>
-                    <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
-                </td>
-                <td>
-                  {{ character.gender.name }}
-                </td>
-                <td>
-                    {{ character.titles }}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <tbody>
+            {% for character in characters %}
+                <tr>
+                    <td>
+                        <div class="card card-inverse">
+                        <div class="card-block">
+                          <div align="center">
+                        <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
+                          </div>
+                                  </div>
+                                  </div>
+                    </td>
+                    <td>
+                      <div class="card">
+                        <div class="card-block">
+                      <div align="center">
+                        {{ character.gender.name }}
+                      </div>
+                        </div>
+                    </td>
+                    <td>
+                      <div align="left">
+                          <div class="card">
+                          <div class="card-block">
+
+                        {{character.title_strings}}
+
+                          </div>
+                          </div>
+                      </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+      </div>
+  </div>
 </div>
 
 

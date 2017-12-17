@@ -18,6 +18,7 @@ class Character(models.Model):
     updated_at = models.DateTimeField('last updated')
     gender = models.ForeignKey(Gender)
     titles = models.TextField(null=True, default=None)
+    title_strings = models.TextField(null=True, default=None)
 
     def __str__(self):
         return self.name

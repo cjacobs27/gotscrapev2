@@ -40,7 +40,8 @@ Here's a guide to what pages do so far:
 `http://localhost:8000/gotsv2`
 
 View list of names of the Characters that are already in the database: names are displayed
-as links to the URLs of character pages. Gender and Titles are also listed.
+as links to the URLs of character pages. Gender and Titles are also listed, and there is a link to the Graph page
+where you can see both graphs.
 
 `http://localhost:8000/gotsv2/update`
 
@@ -49,10 +50,6 @@ the database, eg. if a new Character Page is published, it will
 bring the relevant info into the database. At the moment each record is printed to the terminal
 to show whether it is 'already in there' or 'just added'.
 
-`http://localhost:8000/gotsv2/graph`
-
-Generates and displays a gender split pie chart. More graphs will be
-available to choose from soon.
 
 This has been a project to help me learn about automated web scraping,
 Django, and SQLite databases.
