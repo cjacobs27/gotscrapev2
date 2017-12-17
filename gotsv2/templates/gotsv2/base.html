@@ -55,23 +55,17 @@ div .card {
     <a class="nav-link" href="/gotsv2/graph">Graphs</a>
     <a class="nav-link" href="/gotsv2/about">About</a>
     <span class="navbar-text">
-      {% block navbartext %}
-
-      {% endblock %}
+      {% block navbartext %}{% endblock %}
     </span>
 </nav>
 
-{% block graphchoice %}
+{% block graphchoice %}{% endblock %}
 
-{% endblock %}
+{% block gendergraph %}{% endblock %}
 
-{% block gendergraph %}
+{% block titlegraph %}{% endblock %}
 
-{% endblock %}
-
-{% block titlegraph %}
-
-{% endblock %}
+{% block dbinfo %}{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

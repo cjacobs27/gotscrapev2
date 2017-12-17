@@ -1,64 +1,12 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Game of Thrones Info</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
+{% extends "gotsv2/base.html" %}
 
-<style>
-body {
-    background-color: lightblue;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+{% block navbartext %}
 
-a {
-    color: orangered;
-}
+Database information displayed below
 
-nav {
-     background-color: #aeebe0;
-  }
+{% endblock %}
 
-
-div .card.card-inverse {
-
-          padding: 1px;
-          background-color: #0c3133;
-  }
-
-div .card {
-          padding: 10px;
-          background-color: #aeebe0;
-  }
-
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: middle;
-  border-top-width: 0px;
-  border-top-style: solid;
-  border-top-color: #aeebe0;
-}
-
-</style>
-
-<body>
-
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <a class="navbar-brand" href="/gotsv2/">Game of Thrones Information</a>
-    <a class="nav-link" href="/gotsv2/">Home <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="/gotsv2/update">Update the Database</a>
-    <a class="nav-link" href="/gotsv2/graph">Graphs</a>
-    <a class="nav-link" href="/gotsv2/about">About</a>
-    <span class="navbar-text">
-      Database information displayed below
-    </span>
-</nav>
-
+{% block dbinfo %}
 <div class="container">
     <table class="table">
         <thead>
@@ -108,14 +56,4 @@ div .card {
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
