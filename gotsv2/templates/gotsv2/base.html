@@ -50,63 +50,20 @@ div .card {
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
   <a class="navbar-brand" href="/gotsv2/">Game of Thrones Information</a>
-    <a class="nav-link" href="/gotsv2/">Home <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="/gotsv2/">Home</a>
     <a class="nav-link" href="/gotsv2/update">Update the Database</a>
     <a class="nav-link" href="/gotsv2/graph">Graphs</a>
     <a class="nav-link" href="/gotsv2/about">About</a>
     <span class="navbar-text">
-      Database information displayed below
+      {% block navbartext %}
+
+      {% endblock %}
     </span>
 </nav>
 
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Character Name</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Titles</th>
-        </tr>
-        </thead>
-            <tbody>
-            {% for character in characters %}
-                <tr>
-                    <td>
-                        <div class="card card-inverse">
-                        <div class="card-block">
-                          <div align="center">
-                        <a href="{{ character.url }}" target="_blank">{{ character.name }}</a>
-                          </div>
-                                  </div>
-                                  </div>
-                    </td>
-                    <td>
-                      <div class="card">
-                        <div class="card-block">
-                      <div align="center">
-                        {{ character.gender.name }}
-                      </div>
-                        </div>
-                    </td>
-                    <td>
-                      <div align="left">
-                          <div class="card">
-                          <div class="card-block">
+{% block graphchoice %}
 
-                        {{character.title_strings}}
-
-                          </div>
-                          </div>
-                      </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-      </table>
-      </div>
-  </div>
-</div>
-
+{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
