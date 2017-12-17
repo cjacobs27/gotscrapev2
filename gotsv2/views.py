@@ -83,7 +83,7 @@ def title_graph_page(request):
         random_colour = '#%02X%02X%02X' % (r(), r(), r())
         random_colour_list.append(random_colour)
     json_random_colour_list = json.dumps(random_colour_list)
-    print(json_random_colour_list)
+    print(number_of_titles)
     context = {
         'names': json.JSONDecoder().decode(names),
         'title_numbers': json.JSONDecoder().decode(number_of_titles),

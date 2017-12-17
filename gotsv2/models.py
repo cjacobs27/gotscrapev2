@@ -38,6 +38,7 @@ class Character(models.Model):
         for character in Character.objects.all():
             json_object = character.titles
             if json_object == "":
+                number_of_titles_list.append(0)
                 pass
             elif json_object is None:
                 number_of_titles_list.append(0)
