@@ -16,7 +16,7 @@ class Character(models.Model):
     infobox = models.TextField()
     created_at = models.DateTimeField('created')
     updated_at = models.DateTimeField('last updated')
-    gender = models.ForeignKey(Gender)
+    gender = models.ForeignKey(Gender, models.CASCADE)
     titles = models.TextField(null=True, default=None)
     title_strings = models.TextField(null=True, default=None)
 
