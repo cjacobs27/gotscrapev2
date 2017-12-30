@@ -33,34 +33,3 @@ class UpdateMethodTests(TestCase):
         # if not same length then indicates error with appending either list
         test_link_list = Update().generate_links()
         self.assertEqual(len(test_link_list[0]), len(test_link_list[1]))
-
-    # checking other 2 lists
-    # commented this out because it takes too long
-    # def test_if_check_list_and_info_list_same_length(self):
-    #     test_link_list = Update().generate_links()
-    #     test_name_list = test_link_list[0]
-    #     test_name_list_shorter = test_name_list[:10]
-    #     check_list = []
-    #     info_list = []
-    #     a = 0
-    #     for item in test_link_list[1]:
-    #         request = requests.get(item)
-    #         z = request.content
-    #         soup2 = BeautifulSoup(z, "html.parser")
-    #         if "may refer to" in soup2.text:
-    #             Update().try_adding_character_suffix_to_url(item)
-    #         else:
-    #             try:
-    #                 redirected = soup2.find("a", {"class:", "mw-redirect"}).text
-    #                 if redirected == test_name_list_shorter[a]:
-    #                     check_list.append(0)
-    #                     info_list.append("")
-    #                 else:
-    #                     Update().get_infobox(item)
-    #             except:
-    #                 check_list.append(0)
-    #                 info_list.append("")
-    #         a = a + 1
-    #     print(check_list, info_list)
-    #     self.assertEqual(len(check_list), len(info_list))
-
