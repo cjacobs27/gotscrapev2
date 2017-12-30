@@ -1,38 +1,30 @@
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Game of Thrones Info</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'gotsv2/base.html' %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
 
-<body>
+{% block aboutpage %}
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <a class="navbar-brand" href="/gotsv2/">Game of Thrones Information</a>
-    <a class="nav-link" href="/gotsv2/">Home <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="/gotsv2/update">Update the Database</a>
-    <a class="nav-link" href="/gotsv2/graph">Graphs</a>
-    <span class="navbar-text">
-      Database information displayed below
-    </span>
-</nav>
+<div align="center">
+  About the Game of Thrones Web Scraping Demo App:
+</div>
+  <div align="center">
+    <h1> How It Works</h1>
+  </div>
+  <div class="container">
+  <ul>A list of all character names is scraped from Wikipedia using the BeautifulSoup packge for Python 3:
+    <a href="https://en.wikipedia.org/wiki/List_of_A_Song_of_Ice_and_Fire_characters">List of A Song of Ice and Fire
+      Characters</a></ul>
+  <ul>My script saves the list of names to the database and uses them to generate a list of URLs for individual
+    character pages, eg.
+  <a href="https://en.wikipedia.org/wiki/Ned_Stark">en.wikipedia.org/wiki/Ned_Stark</a> </ul>
+  <ul>If a character doesn't have their own character page they are filtered out at this stage, because it's not certain
+ what information is available about them. However, if they were to get their own character page later on, the new page
+    would be picked up when the gotscrape database updates.</ul>
+  <ul>Further web scraping of the individual character pages returns information about the characters' genders and titles.</ul>
+  <ul>Then I used Django and Charts.js to display this data graphically.</ul>
+  <ul>Much more information about each character could be scraped in the same way from the 'infobox' class div on the
+    character pages,
+    as Wikipedia uses standardised formatting, but I just wanted to focus on a couple of types of information in order
+    to demonstrate web scraping.</ul>
+  </div>
 
-Write about me text here.
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
