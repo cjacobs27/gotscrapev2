@@ -1,21 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Character,Gender
+from .models import Character
 from .update import Update
 from .infoscrape import Infoscrape
 import json
-from django.core import serializers
 import random
 
 
 # Create your views here.
-def index(request):
+
+def gotsv2(request):
     characters = Character.objects.all()
 
     context = {'characters': characters,
                # 'clean_titles': clean_titles()
                }
-    return render(request, 'gotsv2/index.html', context)
+    return render(request, 'gotsv2/gotsv2.html', context)
 
 
 def about(request):
