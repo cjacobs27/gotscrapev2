@@ -63,7 +63,6 @@ class Infoscrape:
                                 clean_titles.append(title)
                         clean_titles_dict.update({'titles': clean_titles})
                         json_encoded_titles = json.JSONEncoder().encode(clean_titles_dict)
-                        print(clean_titles_dict)
                         character.titles = json_encoded_titles
                         character.save()
                     else:
