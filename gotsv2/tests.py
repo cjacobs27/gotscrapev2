@@ -36,6 +36,18 @@ class TemplateViewTests(TestCase):
         response = c.post('/gotsv2/gender-graph/')
         self.assertEqual(response.status_code,200)
 
+    #does the gotsv2 page display
+    def test_gotsv2_page_displays(self):
+        c = Client()
+        response = c.post('/gotsv2/')
+        self.assertEqual(response.status_code,200)
+
+    #does the graph page display
+    def test_graph_page_displays(self):
+        c = Client()
+        response = c.post('/gotsv2/graph/')
+        self.assertEqual(response.status_code,200)
+
 
 # class UpdateMethodTests(TestCase):
     #all these tests might be a bit dodgy, will come back to these
