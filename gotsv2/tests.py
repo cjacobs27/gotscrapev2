@@ -4,6 +4,7 @@ from django.test import Client
 from .update import Update
 from .models import Character
 from datetime import datetime
+import json
 from django.utils.timezone import make_aware
 
 class TemplateViewTests(TestCase):
@@ -19,10 +20,14 @@ class TemplateViewTests(TestCase):
             else:
                 one_or_two = 2
             time = datetime.now()
+            clean_titles = [["title1"],["t2"],["t3"]]
+            clean_titles_dict = {}
+            clean_titles_dict.update({"titles": clean_titles})
+            json_encoded_titles = json.JSONEncoder().encode(clean_titles_dict)
             a_time = make_aware(time, timezone=None, is_dst=None)
             Character.objects.create(name='Name %s' % object_num, url='URL %s' % object_num, page = one_or_two,
-                                     infobox='Infobox HTML %s' % object_num, created_at=a_time, updated_at=a_time, gender_id= one_or_two, titles='titles %s' %
-                                     object_num, title_strings='title strings %s' % object_num)
+                                     infobox='Infobox HTML %s' % object_num, created_at=a_time, updated_at=a_time,
+                                     gender_id= one_or_two, titles=json_encoded_titles, title_strings='title strings %s' % object_num)
 
     #does the about page display
     def test_about_page_displays(self):
