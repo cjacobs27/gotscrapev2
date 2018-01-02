@@ -2,12 +2,27 @@ import requests
 from django.test import TestCase
 from django.test import Client
 from .update import Update
-# from bs4 import BeautifulSoup
+from .models import Character
+from datetime import datetime
+from django.utils.timezone import make_aware
 
 class TemplateViewTests(TestCase):
     def setUp(self):
         self.client = Client()
 
+    @classmethod
+    def setUpTestData(cls):
+        number_of_objects = 130
+        for object_num in range(number_of_objects):
+            if object_num % 2 == 0:
+                one_or_two = 1
+            else:
+                one_or_two = 2
+            time = datetime.now()
+            a_time = make_aware(time, timezone=None, is_dst=None)
+            Character.objects.create(name='Name %s' % object_num, url='URL %s' % object_num, page = one_or_two,
+                                     infobox='Infobox HTML %s' % object_num, created_at=a_time, updated_at=a_time, gender_id= one_or_two, titles='titles %s' %
+                                     object_num, title_strings='title strings %s' % object_num)
 
     #does the about page display
     def test_about_page_displays(self):
@@ -16,8 +31,7 @@ class TemplateViewTests(TestCase):
         self.assertEqual(response.status_code,200)
 
     #does the gender-graph page display
-    #no - it divides by 0 trying to generate the graph if the database is empty
-    def test_about_page_displays(self):
+    def test_gender_graph_page_displays(self):
         c = Client()
         response = c.post('/gotsv2/gender-graph/')
         self.assertEqual(response.status_code,200)
