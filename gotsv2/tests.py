@@ -53,6 +53,12 @@ class TemplateViewTests(TestCase):
         response = c.post('/gotsv2/graph/')
         self.assertEqual(response.status_code,200)
 
+    #does the title graph page display
+    def test_title_graph_page_displays(self):
+        c = Client()
+        response = c.post('/gotsv2/title-graph/')
+        self.assertEqual(response.status_code,200)
+
 
 # class UpdateMethodTests(TestCase):
     #all these tests might be a bit dodgy, will come back to these
