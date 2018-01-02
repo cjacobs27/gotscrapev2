@@ -18,7 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     #separate urls.py needed for landing page of chelseyjacobs.com - will be outside the GoT app
-    url(r'^$', include('chelseyjacobs.urls')),
+    url(r'^', include('chelseyjacobs.urls')),
     url(r'^gotsv2/', include('gotsv2.urls')),
     url(r'^admin/', admin.site.urls),
 ]
