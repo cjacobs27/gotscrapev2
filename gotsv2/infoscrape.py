@@ -22,6 +22,7 @@ class Infoscrape:
                     self.unencodedGender.append(gender)
                 else:
                     pass
+        return self.unencodedGender
 
     def label_male_and_female(self):
         a = 0
