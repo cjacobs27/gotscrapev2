@@ -6,6 +6,7 @@ from .models import Character
 from datetime import datetime
 import json
 from django.utils.timezone import make_aware
+from bs4 import BeautifulSoup
 
 class TemplateViewTests(TestCase):
     def setUp(self):
@@ -33,19 +34,19 @@ class TemplateViewTests(TestCase):
     def test_about_page_displays(self):
         c = Client()
         response = c.post('/gotsv2/about/')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
 
     #does the gender-graph page display
     def test_gender_graph_page_displays(self):
         c = Client()
         response = c.post('/gotsv2/gender-graph/')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
 
     #does the gotsv2 page display
     def test_gotsv2_page_displays(self):
         c = Client()
         response = c.post('/gotsv2/')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
 
     #does the graph page display
     def test_graph_page_displays(self):
@@ -59,6 +60,31 @@ class TemplateViewTests(TestCase):
         response = c.post('/gotsv2/title-graph/')
         self.assertEqual(response.status_code,200)
 
+
+class InfoscrapeTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.genders = []
+        self.unencodedGender = []
+        self.titles = []
+        number_of_objects = 130
+        for object_num in range(number_of_objects):
+            if object_num % 2 == 0:
+                one_or_two = 1
+            else:
+                one_or_two = 2
+            time = datetime.now()
+            clean_titles = [["title1"],["t2"],["t3"]]
+            clean_titles_dict = {}
+            clean_titles_dict.update({"titles": clean_titles})
+            json_encoded_titles = json.JSONEncoder().encode(clean_titles_dict)
+            a_time = make_aware(time, timezone=None, is_dst=None)
+            infobox_html = BeautifulSoup('test_infobox.html', "html.parser")
+            print(infobox_html)
+            Character.objects.create(name='Name %s' % object_num, url='URL %s' % object_num, page = one_or_two,
+                                     infobox='Infobox HTML %s' % object_num, created_at=a_time, updated_at=a_time,
+                                     gender_id= one_or_two, titles=json_encoded_titles, title_strings='title strings %s' % object_num)
+           #self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
 
 # class UpdateMethodTests(TestCase):
     #all these tests might be a bit dodgy, will come back to these
