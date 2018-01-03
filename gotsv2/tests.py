@@ -85,8 +85,9 @@ class InfoscrapeTests(TestCase):
         #then gender info has been scraped from each page
         self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
         i = Infoscrape()
-        output = i.gender_text_scrape()
-        self.assertEqual(len(output),130)
+        i.gender_text_scrape()
+        genders = i.unencodedGender
+        self.assertEqual(len(genders), 130)
 
 
 # class UpdateMethodTests(TestCase):
