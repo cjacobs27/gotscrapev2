@@ -65,24 +65,27 @@ class TemplateViewTests(TestCase):
 
 class InfoscrapeTests(TestCase):
     def setUp(self):
-        #client may not be needed
+        # client may not be needed
         self.client = Client()
-        #lists for use with Infoscrape methods
-        #generating slightly different test db from before due to needing proper infobox data:
+        # lists for use with Infoscrape methods
+        # generating slightly different test db from before due to needing proper infobox data:
         number_of_objects = 130
-        gender_id = 1
         test_infobox = open('gotsv2/test_infobox.html')
         infobox_html = BeautifulSoup(test_infobox, "html.parser")
         for object_num in range(number_of_objects):
+            if object_num % 2 == 0:
+                one_or_two = 1
+            else:
+                one_or_two = 2
             time = datetime.now()
             a_time = make_aware(time, timezone=None, is_dst=None)
-            Character.objects.create(name='Name', url='URL', page = gender_id,
+            Character.objects.create(name='Name', url='URL', page = one_or_two,
                                      infobox=str(infobox_html), created_at=a_time, updated_at=a_time,
-                                     gender_id= gender_id, titles= 'titles', title_strings='title strings')
+                                     gender_id= one_or_two, titles= 'titles', title_strings='title strings')
 
     def test_gender_text_scrape_method_list_complete(self):
-        #if the unencodedGender list is 130 items (the number of fake characters in the TestCase)
-        #then gender info has been scraped from each page
+        # if the unencodedGender list is 130 items (the number of fake characters in the TestCase)
+        # then gender info has been scraped from each page
         self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
         i = Infoscrape()
         i.gender_text_scrape()
@@ -90,7 +93,7 @@ class InfoscrapeTests(TestCase):
         self.assertEqual(len(genders), 130)
 
     def test_gender_text_scrape_method_list_correct(self):
-        #if the unencodedGender list contains anything except 'Male' or 'Female' there's been an error.
+        # if the unencodedGender list contains anything except 'Male' or 'Female' there's been an error.
         self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
         i = Infoscrape()
         i.gender_text_scrape()
@@ -104,6 +107,71 @@ class InfoscrapeTests(TestCase):
                     print(item)
                     return False
         self.assertTrue(check_list_correct(), True)
+
+    def test_label_male_and_female_updates_db(self):
+        i = Infoscrape()
+        # need to run i.gender_text_scrape() to generate unencodedGender list in TestCase
+        i.gender_text_scrape()
+        genders = i.unencodedGender
+        i.label_male_and_female()
+        # as the dummy infoscrape code is for a Male character, all gender_ids should be saved to Male (1)
+        # TestCase db alternates gender so half is 1 and half is 2
+        test_db_gender_ids = Character.objects.values_list('gender_id', flat=True)
+        def check_gender_ids():
+            for item in test_db_gender_ids:
+                if item == 1:
+                    return True
+                else:
+                    print(item)
+                    return False
+        # bear in mind that the gender_id for all Test Characters in test db is now 1
+        self.assertTrue(check_gender_ids(), True)
+
+    def test_scrape_titles_and_update_model_scrapes_correctly(self):
+        # this test checks both the content and type (str as JSON encoded) of this method's output
+        i = Infoscrape()
+        ned_stark_titles = i.scrape_titles_and_update_model()
+        # str below is expected output of above method (changed from dict to str so can be tested)
+        # as it's the correct scrape result from dummy infobox
+        check_against = {"titles": ["Lord of Winterfell", "Lord Paramount and Warden of the North",
+                                        "Hand of the King", "Protector of the Realm", "Lord Regent of the Seven Kingdoms"]}
+        # in order for check_against to match this method's output it must be JSON encoded
+        # as the titles in the db were already encoded in the real script before being saved
+        json_check_against = json.JSONEncoder().encode(check_against)
+        self.assertEqual(ned_stark_titles, json_check_against, True)
+
+    def test_scrape_titles_and_update_model_updates_model(self):
+        # this looks a little dodge but does work - comment out next two lines and run test suite if
+        # momentarily lacking in confidence - all 3 print statements will be called
+        i = Infoscrape()
+        i.scrape_titles_and_update_model()
+        after_method_run = Character.objects.values_list('titles', flat=True)
+
+        def check_titles_populated():
+            # setting token to False initially so then it needs to be changed to True to confirm working
+            # rather than just remaining True and being changed to False
+            token = False
+            if len(after_method_run[0]) < 10:
+                print("NUMBER 1.....", after_method_run[0])
+                token = False
+            else:
+                token = True
+            if len(after_method_run[65]) < 10:
+                print("NUMBER 2.....", after_method_run[65])
+                token = False
+            else:
+                token = True
+            if len(after_method_run[129]) < 10:
+                print("NUMBER 3.....", after_method_run[129])
+                token = False
+            else:
+                token = True
+
+            self.assertTrue(token, True)
+        check_titles_populated()
+
+
+
 
 # class UpdateMethodTests(TestCase):
     #all these tests might be a bit dodgy, will come back to these
