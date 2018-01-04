@@ -50,7 +50,6 @@ def graph(request):
         random_colour = '#%02X%02X%02X' % (r(), r(), r())
         random_colour_list.append(random_colour)
     json_random_colour_list = json.dumps(random_colour_list)
-    print(json_random_colour_list)
     context = {
         'percentages': json_percentages,
         'names': json.JSONDecoder().decode(names),
