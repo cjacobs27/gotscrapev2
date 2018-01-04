@@ -89,6 +89,21 @@ class InfoscrapeTests(TestCase):
         genders = i.unencodedGender
         self.assertEqual(len(genders), 130)
 
+    def test_gender_text_scrape_method_list_correct(self):
+        #if the unencodedGender list contains anything except 'Male' or 'Female' there's been an error.
+        self.db_character_infoboxes = Character.objects.values_list('infobox', flat=True)
+        i = Infoscrape()
+        i.gender_text_scrape()
+        genders = i.unencodedGender
+
+        def check_list_correct():
+            for item in genders:
+                if 'Male' or 'Female' in item:
+                    return True
+                else:
+                    print(item)
+                    return False
+        self.assertTrue(check_list_correct(), True)
 
 # class UpdateMethodTests(TestCase):
     #all these tests might be a bit dodgy, will come back to these
