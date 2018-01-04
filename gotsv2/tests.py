@@ -170,7 +170,58 @@ class InfoscrapeTests(TestCase):
             self.assertTrue(token, True)
         check_titles_populated()
 
+    def test_populate_title_strings_model_works(self):
+        # similar to test_scrape_titles_and_update_model_scrapes_correctly, we're now looking at title_strings rather
+        # than titles
+        # all this does is de-encode the json titles and removes the dictionary-style formatting as below
+        i = Infoscrape()
+        # method from previous test required to populate titles with JSON data
+        i.scrape_titles_and_update_model()
+        i.populate_title_strings_model()
+        populated_title_strings = Character.objects.values_list('title_strings', flat=True)
 
+        def check_title_strings_populated():
+            # setting token to False initially so then it needs to be changed to True to confirm working
+            # rather than just remaining True and being changed to False
+            token = False
+            if len(populated_title_strings[0]) < 10:
+                print("NUMBER 1.....", populated_title_strings[0])
+                token = False
+            else:
+                token = True
+            if len(populated_title_strings[65]) < 10:
+                print("NUMBER 2.....", populated_title_strings[65])
+                token = False
+            else:
+                token = True
+            if len(populated_title_strings[129]) < 10:
+                print("NUMBER 3.....", populated_title_strings[129])
+                token = False
+            else:
+                token = True
+
+            self.assertTrue(token, True)
+        check_title_strings_populated()
+
+    def test_title_strings_likely_to_have_correct_content(self):
+        # matching output against expected - ofc these title_strings will all be different in real script
+        # but if they were all the same with real data then previous tests would've picked this up
+        expected = "Lord of Winterfell, Lord Paramount and Warden of the North, Hand of the King, Protector of the Realm, Lord Regent of the Seven Kingdoms"
+        i = Infoscrape()
+        # method from previous test required to populate titles with JSON data
+        i.scrape_titles_and_update_model()
+        i.populate_title_strings_model()
+        populated_title_strings = Character.objects.values_list('title_strings', flat=True)
+        self.assertEqual(expected, populated_title_strings[0], True)
+
+    def test_titles_strings_correct_format(self):
+        # they need to be strings not json
+        i = Infoscrape()
+        # method from previous test required to populate titles with JSON data
+        i.scrape_titles_and_update_model()
+        i.populate_title_strings_model()
+        populated_title_strings = Character.objects.values_list('title_strings', flat=True)
+        self.assertEqual(type(populated_title_strings[0]), str, True)
 
 
 # class UpdateMethodTests(TestCase):
