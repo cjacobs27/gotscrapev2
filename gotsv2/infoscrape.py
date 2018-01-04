@@ -69,6 +69,7 @@ class Infoscrape:
                         pass
                 except AttributeError:
                     pass
+        return json_encoded_titles
 
     def populate_title_strings_model(self):
         characters = Character.objects.all()
