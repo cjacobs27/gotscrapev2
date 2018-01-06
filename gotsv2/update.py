@@ -51,8 +51,9 @@ class Update:
                     self.link_list.append(url)
             else:
                 pass
-        list_for_testing = [self.name_list, self.link_list]
-        return list_for_testing
+
+        # list_for_testing = [self.name_list, self.link_list]
+        # return list_for_testing
 
     def link_scrape(self):
         a = 0
@@ -76,7 +77,6 @@ class Update:
                     self.info_list.append("")
             print(str(a) + "checked")
             a = a + 1
-            print()
 
     def try_adding_character_suffix_to_url(self, item):
         try:

@@ -63,13 +63,13 @@ class Infoscrape:
                                 clean_titles.append(title)
                         clean_titles_dict.update({'titles': clean_titles})
                         json_encoded_titles = json.JSONEncoder().encode(clean_titles_dict)
-                        print(clean_titles_dict)
                         character.titles = json_encoded_titles
                         character.save()
                     else:
                         pass
                 except AttributeError:
                     pass
+        return json_encoded_titles
 
     def populate_title_strings_model(self):
         characters = Character.objects.all()
