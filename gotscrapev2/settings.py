@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@3d-=b^ssb&1*-1#fqi-yaz1l%i&wl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','www.chelseyjacobs.com', 'chelseyjacobs.com']
+ALLOWED_HOSTS = ['127.0.0.1','www.chelseyjacobs.herokuapp.com','chelseyjacobs.herokuapp.com','www.chelseyjacobs.com', 'chelseyjacobs.com']
 
 
 # Application definition
