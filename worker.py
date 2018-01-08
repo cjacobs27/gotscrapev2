@@ -3,6 +3,8 @@ import os
 import redis
 from redis import Redis
 from rq import Worker, Queue, Connection
+import django
+django.setup()
 from gotsv2.update import Update
 from gotsv2.infoscrape import Infoscrape
 
