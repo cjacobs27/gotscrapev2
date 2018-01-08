@@ -19,11 +19,20 @@ if __name__ == '__main__':
         worker = Worker(map(Queue, listen))
         worker.work()
 
+# come back to below if other fix doesn't work
+# h = Queue('high', connection=Redis())
+# l = Queue('low', connection=Redis())
+#
+# u = Update()
+# i = Infoscrape()
+# result1 = h.enqueue(u.gender_foreign_key_init())
+# result2 = l.enqueue(u.generate_links(), u.link_scrape(), u.character_model_update(),
+#                    i.encode_gender_and_update(), i.scrape_titles_and_update_model(), i.populate_title_strings_model())
 
-q = Queue(connection=Redis())
+q = Queue('high', connection=Redis())
 
 u = Update()
 i = Infoscrape()
-result = q.enqueue(u.gender_foreign_key_init(), u.generate_links(), u.link_scrape(), u.character_model_update(),
-                   i.encode_gender_and_update(), i.scrape_titles_and_update_model(), i.populate_title_strings_model())
 
+result = q.enqueue(u.gender_foreign_key_init(),u.generate_links(), u.link_scrape(), u.character_model_update(),
+                   i.encode_gender_and_update(), i.scrape_titles_and_update_model(), i.populate_title_strings_model())
