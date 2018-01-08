@@ -143,7 +143,7 @@ class Update:
         df = unordered_df[['Names', 'URLs', 'Pages', 'Infoboxes']]
         a = 0
         for item in df['Names']:
-            m = Character(name=df['Names'][a], url=df['URLs'][a], page=df['Pages'][a], infobox=df['Infoboxes'][a], created_at=timezone.now(), updated_at=timezone.now(), gender_id= "Male")
+            m = Character(name=df['Names'][a], url=df['URLs'][a], page=df['Pages'][a], infobox=df['Infoboxes'][a], created_at=timezone.now(), updated_at=timezone.now(), gender= 1)
             if df['Pages'][a] == 1:
                 u = df['URLs'][a]
                 if self.check_for_update_duplicates(u) is True:
