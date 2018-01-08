@@ -1,3 +1,5 @@
+# This script works with the worker.py script: it schedules the tasks that are queued in worker.py via RQ/Redis
+
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
