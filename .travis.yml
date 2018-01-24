@@ -9,11 +9,10 @@ install:
   - pip install pandas
   - pip install requests
 
-#script:
-#  - python manage.py test gotsv2
-
 # added following to see if it'll get travis.cl working again...
 deploy:
   provider: heroku
   app: chelsey-jacobs
 
+script:
+  - python manage.py test gotsv2
