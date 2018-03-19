@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@3d-=b^ssb&1*-1#fqi-yaz1l%i&wl4sx8+!c(#6=f_-m_l%if')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','www.chelseyjacobs.herokuapp.com','chelseyjacobs.herokuapp.com','www.chelseyjacobs.com', 'chelseyjacobs.com']
 
