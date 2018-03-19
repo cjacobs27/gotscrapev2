@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^makesandwich/', include('makesandwich.urls')),
     url(r'^gotsv2/', include('gotsv2.urls')),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
