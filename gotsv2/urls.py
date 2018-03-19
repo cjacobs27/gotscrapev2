@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from . import views
 
+
+# these determine urls based on the /gotsv2 root - see gotscrapev2/urls
 urlpatterns = [
     url(r'^$', views.gotsv2, name='gotsv2'),
     # url(r'^update/', views.update, name='runupdate'),
