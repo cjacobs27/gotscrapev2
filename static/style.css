@@ -65,6 +65,26 @@ button:active {
     transform: translateY(-1px);
 }
 
+a {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+#back {
+    -webkit-transition-duration: 0.4s;
+    color: whitesmoke;
+    border-color: transparent;
+    border-radius: 12px;
+    background-color: #6ca7b3;
+}
+
+#back:hover {
+    transform: translateY(-3px);
+    border: 2px solid #000000;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
 #del {
     transform: none;
     margin-right: 800px;
