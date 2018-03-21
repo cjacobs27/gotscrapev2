@@ -151,9 +151,9 @@ a {
 }
 
 #plate {
-    margin-left: 5px;
-    width: 966px;
-    height: 250px;
+    margin-left: 20px;
+    max-width: 100%;
+    height: auto;
 }
 
 @keyframes moveInLeft {
@@ -194,3 +194,4 @@ h3 {
     text-align: center;
     color: #6ca7b3;
 }
+
