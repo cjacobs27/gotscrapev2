@@ -150,6 +150,19 @@ a {
     box-shadow: 0 35px 20px rgba(0, 0, 0, .4);
 }
 
+.ingListBread {
+    font-weight: bold;
+    position: relative;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 2px solid #E9E9E9;
+    border-radius: 100px;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    box-shadow: 0 35px 20px rgba(0, 0, 0, .4);
+    height: "45px";
+}
+
 #plate {
     margin-left: 20px;
     max-width: 100%;
