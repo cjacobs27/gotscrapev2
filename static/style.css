@@ -160,7 +160,7 @@ a {
     animation-name: moveInLeft;
     animation-duration: 1s;
     box-shadow: 0 35px 20px rgba(0, 0, 0, .4);
-    height: "45px";
+    height: 45px;
 }
 
 #plate {
